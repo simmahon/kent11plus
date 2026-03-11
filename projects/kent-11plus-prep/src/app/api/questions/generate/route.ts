@@ -115,6 +115,133 @@ Two groups of words. Find one word from each that combine to make a real word.
 GOOD stem: "Find one word from each group that together make a new word. Group 1: (rain, sun, cloud) Group 2: (bow, set, fall)"
 Options: rainbow, sunset, rainfall, sunbow, cloudset
 
+=== NUMBER CODES ===
+Letters are mapped to numbers using worked examples. The child decodes or encodes a word.
+
+GOOD stem: "If CHAIR is coded as 3-8-1-9-18 (A=1, B=2, ... Z=26), what word is coded as 4-15-7?"
+Options: DOG, DIG, FOG, COG, LOG
+
+GOOD stem: "In a code, CAT = 24, DOG = 26. Each letter is worth its alphabet position (A=1, B=2, ...). What does FOX equal?"
+Options: 45, 42, 48, 39, 51
+
+Construction: Use A=1...Z=26 or simple consistent mappings. VERIFY arithmetic: add up letter values and confirm the total. The rule must be deducible from the examples given.
+
+=== MOVE A LETTER ===
+Move exactly one letter from one word to another to make two new real words. Both new words must be real English words.
+
+GOOD stem: "Move one letter from WHEAT to PLAN to make two new words."
+Options: "WHAT & PLANE", "HEAT & PLANE", "WHEA & PLANT", "WHET & PLAN", "WHAT & PLAN"
+
+Construction: Pick two common words where removing a letter from one and inserting it into the other makes two new valid words. VERIFY both resulting words exist in standard dictionaries.
+
+=== INSERT A LETTER ===
+Add one letter somewhere in a given word to make a new word matching a definition clue.
+
+GOOD stem: "Add one letter to PLAN to make a word meaning 'simple'."
+Options: PLAIN, PLANE, PLANT, PLANK, PLAID
+
+GOOD stem: "Insert one letter into HEAT to make a word meaning 'the centre of something'."
+Options: HEART, WHEAT, CHEAT, HEATH, HEATS
+
+Construction: The definition must clearly point to one answer. All distractors should be real words that could plausibly be formed by inserting a letter.
+
+=== COMPLETE THE WORD ===
+Fill in missing letters to make a word matching a definition clue. Show blanks as underscores.
+
+GOOD stem: "Complete the word: B _ _ K (something you read)"
+Options: BOOK, BEAK, BACK, BULK, BARK
+
+GOOD stem: "Complete the word: _ O U N _ (a shape or a limit)"
+Options: ROUND, BOUND, FOUND, MOUND, SOUND
+
+Construction: The blanks and the definition together should lead to one clear answer. Include plausible distractors that also fit the letter pattern but NOT the definition.
+
+=== WORD CONNECTIONS ===
+Find a word that can follow the first given word AND precede the second given word to make two compound words or common phrases.
+
+GOOD stem: "Find a word that can follow SUN and come before HOUSE."
+Options: LIGHT, FIRE, FLOWER, SET, RISE
+
+(sunLIGHT, LIGHThouse)
+
+GOOD stem: "Find a word that can follow FOOT and come before GAME."
+Options: BALL, NOTE, STEP, PRINT, WEAR
+
+(footBALL, BALLgame)
+
+Construction: Both compound words (or established two-word phrases) must be real. Verify that the connecting word genuinely works in BOTH positions. Distractors should form a valid compound with one of the two given words but not both.
+
+=== ALPHABET POSITION ===
+Questions about the position of letters in the alphabet, counting forwards or backwards.
+
+GOOD stem: "Which letter is 5th from the end of the alphabet?"
+Options: V, U, W, T, X
+
+GOOD stem: "If the first half of the alphabet is A-M and the second is N-Z, which letter is 3rd in the second half?"
+Options: P, O, Q, N, R
+
+GOOD stem: "What letter is exactly midway between D and J in the alphabet?"
+Options: G, F, H, E, I
+
+Construction: Questions should require mental counting or simple arithmetic on letter positions. VERIFY your answer by counting carefully. Include near-miss distractors (adjacent letters).
+
+=== NUMBER RELATIONSHIPS ===
+Number patterns presented in a verbal context. The child must identify the rule and find the missing number.
+
+GOOD stem: "If 3 → 9, 4 → 16, 5 → 25, what does 7 → ?"
+Options: 49, 42, 36, 56, 64
+
+GOOD stem: "In a number machine, 2 becomes 7, 3 becomes 10, 4 becomes 13. What does 6 become?"
+Options: 19, 18, 21, 16, 20
+
+Construction: The rule should be a single consistent operation (squaring, doubling and adding, multiplying and subtracting, etc.). VERIFY by applying the rule to all given pairs. Keep operations within the mental arithmetic range of a Year 5/6 child.
+
+=== SHUFFLED SENTENCES ===
+Words of a sentence are given in a scrambled order. The child must rearrange them into a correct sentence, then answer a question about it.
+
+GOOD stem: "Rearrange these words to make a sentence: 'park the walked to dog the'. Who walked to the park?"
+Options: the dog, the park, the cat, the man, the boy
+
+GOOD stem: "Put these words in the right order: 'baked cake a Lucy chocolate'. What did Lucy bake?"
+Options: a chocolate cake, a lemon cake, chocolate biscuits, a fruit cake, a birthday cake
+
+Construction: The scrambled words must form exactly ONE grammatically correct sentence. The comprehension question must be clearly answerable from the unscrambled sentence. Distractors should be plausible but not supported by the sentence.
+
+=== WORD MATRICES ===
+A 2×2 or 3×3 grid of words where rows and/or columns follow consistent relationship rules (e.g. synonyms across rows, categories down columns). One cell is missing.
+
+GOOD stem: "Look at this word grid. Find the missing word.\n  hot  | cold\n  big  |  ?  "
+Options: small, large, huge, tiny, wide
+(Rule: each row contains antonym pairs → hot/cold, big/small)
+
+GOOD stem: "Find the missing word in this grid.\n  cat  | kitten\n  dog  | puppy\n  cow  |   ?   "
+Options: calf, foal, lamb, piglet, chick
+(Rule: column 1 = adult animal, column 2 = its young)
+
+Construction: The relationship rule must be consistent and discoverable. Present the grid clearly using a simple text layout (pipe-separated columns, one row per line). VERIFY the missing word is the only one that maintains the pattern. Distractors should follow the general theme but break the specific rule.
+
+=== SAME MEANING ===
+Two sentences are given. The child must find one word from each sentence that means the same (are synonyms).
+
+GOOD stem: "Find two words, one from each sentence, that mean the same.\nSentence 1: The quick fox jumped over the fence.\nSentence 2: The swift rabbit ran across the field."
+Options: "quick & swift", "fox & rabbit", "jumped & ran", "fence & field", "over & across"
+
+GOOD stem: "Find two words, one from each sentence, that have the same meaning.\nSentence 1: The ancient castle stood on the hilltop.\nSentence 2: The old church was built by the river."
+Options: "ancient & old", "castle & church", "stood & built", "hilltop & river", "the & the"
+
+Construction: The two synonym words must genuinely mean the same thing. The sentences should contain other words that might seem related but are not true synonyms. Distractors should pair words that are thematically linked but NOT synonyms.
+
+=== CLOSEST MEANING IN CONTEXT ===
+A sentence is given with one word underlined or highlighted. The child picks the word closest in meaning to that word AS USED in that specific context.
+
+GOOD stem: "In the sentence 'The bright student answered every question correctly', which word is closest in meaning to 'bright'?"
+Options: clever, shiny, colourful, happy, light
+
+GOOD stem: "In the sentence 'She had to bear the heavy load up the mountain', which word is closest in meaning to 'bear'?"
+Options: carry, animal, tolerate, hold, suffer
+
+Construction: Choose a word that has multiple meanings so the context matters. The correct answer must match the CONTEXTUAL meaning. Distractors should include words that match OTHER meanings of the highlighted word or are loosely related. This differs from basic synonyms because context determines which meaning applies.
+
 QUALITY RULES:
 - The question stem must read like a professional exam paper -- clean, clear, no working shown
 - Near-miss distractors that look plausible

@@ -29,6 +29,7 @@ export interface NVRQuestion {
   explanation: string;
   difficulty: number;
   patternType: string;
+  prompt?: string;
 }
 
 /* -- Utilities ---------------------------------------------------- */
@@ -490,6 +491,240 @@ function alternatingPattern(difficulty: number): NVRQuestion {
 }
 
 /* ================================================================ */
+/*  Odd-One-Out                                                     */
+/* ================================================================ */
+
+function oddOneOutPattern(difficulty: number): NVRQuestion {
+  // Pick a shared property set, then make one shape differ
+  const baseType = pick(SHAPE_TYPES);
+  const baseFill = pick(FILL_TYPES);
+  const baseRotation = pick([0, 45, 90, 180]);
+  const baseSize: SizeType = pick(SIZE_TYPES);
+
+  const base: ShapeConfig = {
+    type: baseType,
+    fill: baseFill,
+    rotation: baseRotation,
+    size: baseSize,
+  };
+
+  let odd: ShapeConfig;
+  let explanationText: string;
+
+  if (difficulty <= 2) {
+    // Easy: change fill or shape type (obvious)
+    if (Math.random() < 0.5) {
+      const oddFill = pick(FILL_TYPES.filter((f) => f !== baseFill));
+      odd = { ...base, fill: oddFill };
+      explanationText = `Four shapes have ${baseFill} shading, but the odd one out has ${oddFill} shading.`;
+    } else {
+      const oddType = pick(SHAPE_TYPES.filter((s) => s !== baseType));
+      odd = { ...base, type: oddType };
+      explanationText = `Four shapes are ${baseType}s, but the odd one out is a ${oddType}.`;
+    }
+  } else if (difficulty <= 3) {
+    // Medium: two properties shared, one subtle property differs
+    const oddType = pick(SHAPE_TYPES.filter((s) => s !== baseType));
+    odd = { ...base, type: oddType };
+    explanationText = `Four shapes are ${baseType}s, but the odd one out is a ${oddType}.`;
+  } else {
+    // Hard: subtle difference (rotation or size)
+    if (Math.random() < 0.5) {
+      const oddRotation = (baseRotation + pick([45, 90, 180])) % 360;
+      odd = { ...base, rotation: oddRotation };
+      explanationText = `Four shapes are rotated to ${baseRotation}°, but the odd one out is rotated to ${oddRotation}°.`;
+    } else {
+      const oddSize = pick(SIZE_TYPES.filter((s) => s !== baseSize));
+      odd = { ...base, size: oddSize };
+      explanationText = `Four shapes are ${baseSize}, but the odd one out is ${oddSize}.`;
+    }
+  }
+
+  // Place the odd shape at a random position among 5
+  const oddIndex = Math.floor(Math.random() * 5);
+  const sequence: ShapeConfig[] = Array.from({ length: 5 }, (_, i) =>
+    i === oddIndex ? odd : { ...base },
+  );
+
+  return {
+    sequence,
+    options: sequence,
+    correctIndex: oddIndex,
+    explanation: explanationText,
+    difficulty,
+    patternType: "odd_one_out",
+    prompt: "Which shape is the odd one out?",
+  };
+}
+
+/* ================================================================ */
+/*  Analogies                                                       */
+/* ================================================================ */
+
+function analogyPattern(difficulty: number): NVRQuestion {
+  // A is to B as C is to ?
+  // Generate A, apply transform(s) to get B, generate C, apply same transform(s) to get D
+  const shapeA: ShapeConfig = {
+    type: pick(SHAPE_TYPES),
+    fill: pick(FILL_TYPES),
+    rotation: pick([0, 45, 90]),
+    size: pick(SIZE_TYPES),
+  };
+
+  type Transform = (s: ShapeConfig) => ShapeConfig;
+  const transforms: { fn: Transform; desc: string }[] = [
+    {
+      fn: (s) => ({
+        ...s,
+        fill: FILL_TYPES[(FILL_TYPES.indexOf(s.fill) + 1) % FILL_TYPES.length],
+      }),
+      desc: "fill changes",
+    },
+    {
+      fn: (s) => {
+        const sizes: SizeType[] = ["small", "medium", "large"];
+        return { ...s, size: sizes[(sizes.indexOf(s.size) + 1) % sizes.length] };
+      },
+      desc: "size changes",
+    },
+    {
+      fn: (s) => ({ ...s, rotation: (s.rotation + 90) % 360 }),
+      desc: "rotates 90°",
+    },
+    {
+      fn: (s) => ({
+        ...s,
+        type: SHAPE_TYPES[
+          (SHAPE_TYPES.indexOf(s.type) + 1) % SHAPE_TYPES.length
+        ],
+      }),
+      desc: "shape changes",
+    },
+  ];
+
+  let selectedTransforms: { fn: Transform; desc: string }[];
+  if (difficulty <= 3) {
+    // Easy/medium: single transform
+    selectedTransforms = [pick(transforms)];
+  } else {
+    // Hard: two simultaneous transforms
+    const shuffled = shuffle([...transforms]);
+    selectedTransforms = shuffled.slice(0, 2);
+  }
+
+  const applyTransforms = (s: ShapeConfig): ShapeConfig =>
+    selectedTransforms.reduce((acc, t) => t.fn(acc), s);
+
+  const shapeB = applyTransforms(shapeA);
+
+  // C is a different shape from A
+  const shapeC: ShapeConfig = {
+    type: pick(SHAPE_TYPES.filter((s) => s !== shapeA.type)),
+    fill: shapeA.fill,
+    rotation: shapeA.rotation,
+    size: shapeA.size,
+  };
+
+  const correct = applyTransforms(shapeC);
+  const sequence = [shapeA, shapeB, shapeC];
+
+  // Generate distractors
+  const wrongs: ShapeConfig[] = [
+    { ...correct, fill: pick(FILL_TYPES.filter((f) => f !== correct.fill)) },
+    { ...correct, size: pick(SIZE_TYPES.filter((s) => s !== correct.size)) },
+    { ...correct, rotation: (correct.rotation + 90) % 360 },
+    {
+      ...correct,
+      type: pick(SHAPE_TYPES.filter((s) => s !== correct.type)),
+    },
+  ];
+
+  const { options, correctIndex } = buildOptions(correct, wrongs);
+  const transformDescs = selectedTransforms.map((t) => t.desc).join(" and ");
+
+  return {
+    sequence,
+    options,
+    correctIndex,
+    explanation: `The transformation is: ${transformDescs}. Applying the same transformation to shape C gives the correct answer.`,
+    difficulty,
+    patternType: "analogy",
+    prompt: "A is to B as C is to ?",
+  };
+}
+
+/* ================================================================ */
+/*  Matrices (3×3 grid)                                             */
+/* ================================================================ */
+
+function matrixPattern(difficulty: number): NVRQuestion {
+  // 3×3 grid where each row follows rules. Bottom-right is missing.
+  // Rule 1: each row cycles through 3 shapes
+  // Rule 2: each row cycles through 3 fills
+  // Rule 3: rotation increases along each row
+
+  const shapes = shuffle([...SHAPE_TYPES]).slice(0, 3) as [ShapeType, ShapeType, ShapeType];
+  const fills = shuffle([...FILL_TYPES]).slice(0, 3) as [FillType, FillType, FillType];
+  const sizes: SizeType[] = ["small", "medium", "large"];
+  const rotations = [0, 45, 90];
+
+  // Each row permutes shapes and fills differently
+  // Row 0: shapes[0,1,2], fills[0,1,2]
+  // Row 1: shapes[1,2,0], fills[1,2,0]
+  // Row 2: shapes[2,0,1], fills[2,0,1]
+  const grid: ShapeConfig[] = [];
+
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
+      grid.push({
+        type: shapes[(row + col) % 3],
+        fill: difficulty >= 4 ? fills[(row + col) % 3] : fills[row % 3],
+        rotation: difficulty >= 4 ? rotations[col] : 0,
+        size: sizes[col],
+      });
+    }
+  }
+
+  // The answer is position [2][2] (index 8)
+  const correct = grid[8];
+
+  // Sequence is first 8 cells (missing bottom-right)
+  const sequence = grid.slice(0, 8);
+
+  // Generate distractors
+  const wrongs: ShapeConfig[] = [
+    { ...correct, type: pick(SHAPE_TYPES.filter((s) => s !== correct.type)) },
+    { ...correct, fill: pick(FILL_TYPES.filter((f) => f !== correct.fill)) },
+    { ...correct, size: pick(SIZE_TYPES.filter((s) => s !== correct.size)) },
+    {
+      ...correct,
+      type: pick(SHAPE_TYPES.filter((s) => s !== correct.type)),
+      fill: pick(FILL_TYPES.filter((f) => f !== correct.fill)),
+    },
+  ];
+
+  const { options, correctIndex } = buildOptions(correct, wrongs);
+
+  const ruleDescs: string[] = [];
+  ruleDescs.push(`each row/column contains all three shapes (${shapes.join(", ")})`);
+  ruleDescs.push(`sizes go ${sizes.join(" → ")} across each row`);
+  if (difficulty >= 4) {
+    ruleDescs.push(`fills cycle as ${fills.join(" → ")}`);
+    ruleDescs.push(`rotation increases across columns`);
+  }
+
+  return {
+    sequence,
+    options,
+    correctIndex,
+    explanation: `The grid follows these rules: ${ruleDescs.join("; ")}. The missing shape must be a ${correct.size} ${correct.fill} ${correct.type}.`,
+    difficulty,
+    patternType: "matrix",
+    prompt: "Which shape completes the grid?",
+  };
+}
+
+/* ================================================================ */
 /*  Main export                                                     */
 /* ================================================================ */
 
@@ -499,7 +734,14 @@ export function generateNVRQuestions(
 ): NVRQuestion[] {
   const generators =
     difficulty <= 2
-      ? [rotationPattern, shapeCyclePattern, fillCyclePattern, sizePattern]
+      ? [
+          rotationPattern,
+          shapeCyclePattern,
+          fillCyclePattern,
+          sizePattern,
+          oddOneOutPattern, // weight 2
+          oddOneOutPattern,
+        ]
       : difficulty <= 3
         ? [
             rotationPattern,
@@ -508,15 +750,22 @@ export function generateNVRQuestions(
             combinedPattern,
             combinedPattern,
             shapeAndSizePattern,
+            oddOneOutPattern, // weight 2
+            oddOneOutPattern,
+            analogyPattern, // weight 2
+            analogyPattern,
           ]
         : [
-            // Difficulty 4+: heavily weighted toward multi-property patterns
+            // Difficulty 4+: all types including matrix
             combinedPattern,
             combinedPattern,
             shapeAndSizePattern,
             tripleChangePattern,
             tripleChangePattern,
             alternatingPattern,
+            oddOneOutPattern,
+            analogyPattern,
+            matrixPattern,
           ];
 
   return Array.from({ length: count }, () => pick(generators)(difficulty));

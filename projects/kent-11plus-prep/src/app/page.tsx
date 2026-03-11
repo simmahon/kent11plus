@@ -22,10 +22,10 @@ const GLOW_HOVER_CLASS: Record<string, string> = {
 
 const TRICKY_TOPICS = [
   {
-    label: "Cube Nets",
+    label: "Spatial Reasoning",
     icon: "\uD83E\uDDE9",
-    description: "Mentally fold flat nets into 3D cubes. One of the hardest NVR question types.",
-    href: "/practice/cube-nets",
+    description: "Cube nets, hidden shapes, and reflections. One of the hardest sections on Paper 2.",
+    href: "/practice/spatial-reasoning",
     tag: "Most kids struggle",
   },
   {
@@ -46,7 +46,7 @@ const TRICKY_TOPICS = [
     label: "Inference",
     icon: "\uD83D\uDD0D",
     description: "Read between the lines. The hardest comprehension questions require inference.",
-    href: "/practice/comprehension",
+    href: "/practice/english",
     tag: "Reading skill",
   },
   {

@@ -13,17 +13,17 @@ export const PRACTICE_MODES: PracticeModeConfig[] = [
     glowClass: "glow-cyan",
     colorClass: "text-neon-cyan",
     questionCount: 5,
-    timeLimitSeconds: 200, // ~40s per Q (real test: 30-37s per Q)
+    timeLimitSeconds: 200,
   },
   {
     id: "non-verbal-reasoning",
     label: "Non-Verbal Reasoning",
-    description: "Shape sequences, spatial awareness and visual logic",
+    description: "Shape sequences, matrices, odd-one-out and visual logic",
     icon: "\uD83D\uDD2E",
     glowClass: "glow-purple",
     colorClass: "text-neon-purple",
     questionCount: 5,
-    timeLimitSeconds: 200, // ~40s per Q (real test: ~30s per Q)
+    timeLimitSeconds: 200,
   },
   {
     id: "maths",
@@ -33,37 +33,27 @@ export const PRACTICE_MODES: PracticeModeConfig[] = [
     glowClass: "glow-green",
     colorClass: "text-neon-green",
     questionCount: 5,
-    timeLimitSeconds: 300, // 60s per Q (real test: 60s per Q)
+    timeLimitSeconds: 300,
   },
   {
     id: "english",
     label: "English",
-    description: "Spelling, grammar, vocabulary and comprehension",
+    description: "Spelling, grammar, vocabulary and reading comprehension",
     icon: "\uD83D\uDCDA",
     glowClass: "glow-amber",
     colorClass: "text-neon-amber",
     questionCount: 5,
-    timeLimitSeconds: 300, // 60s per Q (real test: 60s per Q)
+    timeLimitSeconds: 300,
   },
   {
-    id: "comprehension",
-    label: "Comprehension",
-    description: "Reading passages with inference and analysis questions",
-    icon: "\uD83D\uDDD2\uFE0F",
-    glowClass: "glow-pink",
-    colorClass: "text-neon-pink",
-    questionCount: 5,
-    timeLimitSeconds: 450, // 90s per Q (extra time for reading passage)
-  },
-  {
-    id: "cube-nets",
-    label: "Cube Nets",
-    description: "Fold flat nets into cubes and match the 3D view",
+    id: "spatial-reasoning",
+    label: "Spatial Reasoning",
+    description: "Cube nets, hidden shapes, reflections and 3D thinking",
     icon: "\uD83E\uDDE9",
     glowClass: "glow-purple",
     colorClass: "text-neon-purple",
     questionCount: 5,
-    timeLimitSeconds: 250, // 50s per Q (spatial reasoning needs time)
+    timeLimitSeconds: 250,
   },
   {
     id: "random-mix",
@@ -73,6 +63,6 @@ export const PRACTICE_MODES: PracticeModeConfig[] = [
     glowClass: "glow-cyan",
     colorClass: "text-neon-cyan",
     questionCount: 5,
-    timeLimitSeconds: 300, // 60s per Q average
+    timeLimitSeconds: 300,
   },
 ];

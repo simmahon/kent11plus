@@ -47,18 +47,18 @@ export default function OfflinePage() {
         </a>
 
         <a
-          href="/practice/cube-nets"
+          href="/practice/spatial-reasoning"
           className="group flex items-center gap-3 rounded-xl border border-neon-green/20 bg-surface px-5 py-4 transition-all duration-300 hover:border-neon-green/40 hover:bg-surface-hover"
         >
           <span className="text-2xl transition-transform duration-300 group-hover:scale-110">
-            {"\uD83D\uDCE6"}
+            {"\uD83E\uDDE9"}
           </span>
           <div className="flex flex-col items-start gap-0.5">
             <span className="font-mono text-sm font-bold text-neon-green">
-              Cube Nets
+              Spatial Reasoning
             </span>
             <span className="text-xs text-muted-foreground">
-              3D folding puzzles generated client-side
+              Cube nets, hidden shapes &amp; reflections — all client-side
             </span>
           </div>
         </a>

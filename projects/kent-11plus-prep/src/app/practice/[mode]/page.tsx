@@ -14,6 +14,8 @@ import { generateNVRQuestions, type NVRQuestion } from "@/lib/nvr-generator";
 import { NVRQuestionDisplay } from "@/components/nvr-question";
 import { generateCubeNetQuestions, type CubeNetQuestion } from "@/lib/cube-net-generator";
 import { CubeNetQuestionDisplay } from "@/components/cube-net-question";
+import { generateSpatialQuestions, type SpatialQuestion } from "@/lib/spatial-generator";
+import { SpatialQuestionDisplay } from "@/components/spatial-question";
 import { saveSession } from "@/lib/supabase/sessions";
 import { saveQuestionAnswers, type QuestionAnswerInsert, getSeenStems } from "@/lib/supabase/question-answers";
 import { getModeSkillLevel, updateSkillLevel } from "@/lib/supabase/skill-levels";
@@ -36,6 +38,17 @@ const MODE_TO_API: Record<
     { category: "verbal_reasoning", topic: "letter codes and cyphers" },
     { category: "verbal_reasoning", topic: "word relationships and analogies" },
     { category: "verbal_reasoning", topic: "hidden words" },
+    { category: "verbal_reasoning", topic: "number codes" },
+    { category: "verbal_reasoning", topic: "move a letter" },
+    { category: "verbal_reasoning", topic: "insert a letter" },
+    { category: "verbal_reasoning", topic: "complete the word" },
+    { category: "verbal_reasoning", topic: "word connections" },
+    { category: "verbal_reasoning", topic: "alphabet position" },
+    { category: "verbal_reasoning", topic: "number relationships" },
+    { category: "verbal_reasoning", topic: "shuffled sentences" },
+    { category: "verbal_reasoning", topic: "word matrices" },
+    { category: "verbal_reasoning", topic: "same meaning" },
+    { category: "verbal_reasoning", topic: "closest meaning in context" },
   ],
   "non-verbal-reasoning": [
     { category: "non_verbal_reasoning", topic: "shape sequences" },
@@ -53,12 +66,10 @@ const MODE_TO_API: Record<
     { category: "english", topic: "spelling and vocabulary" },
     { category: "english", topic: "grammar and punctuation" },
     { category: "english", topic: "sentence completion" },
-  ],
-  comprehension: [
     { category: "english", topic: "reading comprehension" },
     { category: "english", topic: "inference and deduction" },
   ],
-  "cube-nets": [], // generated locally like NVR
+  "spatial-reasoning": [], // generated locally
   "random-mix": [], // handled specially below
 };
 
@@ -71,7 +82,7 @@ function getApiParams(mode: PracticeMode) {
   if (mode === "random-mix") {
     // Exclude visual modes (need local renderers) and random-mix itself
     const allModes = Object.keys(MODE_TO_API).filter(
-      (k) => k !== "random-mix" && k !== "non-verbal-reasoning" && k !== "cube-nets",
+      (k) => k !== "random-mix" && k !== "non-verbal-reasoning" && k !== "spatial-reasoning",
     ) as PracticeMode[];
     const randomMode = pickRandom(allModes);
     return pickRandom(MODE_TO_API[randomMode]);
@@ -110,13 +121,17 @@ export default function PracticePage() {
   const modeConfig = PRACTICE_MODES.find((m) => m.id === modeSlug);
 
   const isNVRMode = modeSlug === "non-verbal-reasoning";
-  const isCubeNetMode = modeSlug === "cube-nets";
-  const isLocalMode = isNVRMode || isCubeNetMode;
+  const isSpatialMode = modeSlug === "spatial-reasoning";
+  const isLocalMode = isNVRMode || isSpatialMode;
+
+  /* ---- test practice mode (fixed Kent Test difficulty, no adaptive) ---- */
+  const [testPracticeMode, setTestPracticeMode] = useState(false);
 
   /* ---- loading / error state ---- */
   const [questions, setQuestions] = useState<APIQuestion[]>([]);
   const [nvrQuestions, setNvrQuestions] = useState<NVRQuestion[]>([]);
   const [cubeNetQuestions, setCubeNetQuestions] = useState<CubeNetQuestion[]>([]);
+  const [spatialQuestions, setSpatialQuestions] = useState<SpatialQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const fetchedRef = useRef(false);
@@ -153,7 +168,6 @@ export default function PracticePage() {
     wordCount: number;
     source?: string;
   } | null>(null);
-  const isComprehensionMode = modeSlug === "comprehension";
 
   /* ---- fetch skill level on mount ---- */
   useEffect(() => {
@@ -169,7 +183,7 @@ export default function PracticePage() {
     if (!modeConfig) return;
     try {
       const questionCount = modeConfig.questionCount;
-      const difficulty = skillToDifficulty(skillLevelRef.current);
+      const difficulty = testPracticeMode ? 4 : skillToDifficulty(skillLevelRef.current);
 
       /* -- NVR: generate locally with visual patterns -- */
       if (isNVRMode) {
@@ -197,12 +211,18 @@ export default function PracticePage() {
         return;
       }
 
-      /* -- Cube Nets: generate locally -- */
-      if (isCubeNetMode) {
-        const cnQs = generateCubeNetQuestions(questionCount, difficulty);
+      /* -- Spatial Reasoning: mix of cube nets + spatial questions -- */
+      if (isSpatialMode) {
+        const cubeCount = 2;
+        const spatialCount = questionCount - cubeCount;
+        const cnQs = generateCubeNetQuestions(cubeCount, difficulty);
+        const spQs = generateSpatialQuestions(spatialCount, difficulty);
         setCubeNetQuestions(cnQs);
-        setQuestions(
-          cnQs.map((cn) => ({
+        setSpatialQuestions(spQs);
+
+        // Interleave: cube nets first, then spatial questions
+        const apiQs: APIQuestion[] = [
+          ...cnQs.map((cn) => ({
             content: {
               stem: "Which cube can be made from this net?",
               options: ["A", "B", "C", "D", "E"],
@@ -215,9 +235,23 @@ export default function PracticePage() {
             difficulty: cn.difficulty,
             questionType: "cube_net",
           })),
-        );
-        setAnswers(new Array(questionCount).fill(null));
-        questionTimingsRef.current = new Array(questionCount).fill(null);
+          ...spQs.map((sp) => ({
+            content: {
+              stem: sp.prompt,
+              options: ["A", "B", "C", "D", "E"],
+            },
+            correctAnswer: {
+              index: sp.correctIndex,
+              value: String.fromCharCode(65 + sp.correctIndex),
+            },
+            explanation: sp.explanation,
+            difficulty: sp.difficulty,
+            questionType: sp.questionType,
+          })),
+        ];
+        setQuestions(apiQs);
+        setAnswers(new Array(apiQs.length).fill(null));
+        questionTimingsRef.current = new Array(apiQs.length).fill(null);
         questionStartTimeRef.current = Date.now();
         setLoading(false);
         return;
@@ -277,7 +311,7 @@ export default function PracticePage() {
     } finally {
       setLoading(false);
     }
-  }, [modeSlug, modeConfig, isNVRMode, isCubeNetMode]);
+  }, [modeSlug, modeConfig, isNVRMode, isSpatialMode, testPracticeMode]);
 
   /* ---- fetch questions on mount + retry ---- */
   useEffect(() => {
@@ -420,23 +454,25 @@ export default function PracticePage() {
       return next;
     });
 
-    // Update skill level adaptively
+    // Update skill level adaptively (skip in test practice mode)
     const wasCorrect = optionIndex === currentQuestion.correctAnswer.index;
-    const newSkill = calculateNextSkillLevel(skillLevelRef.current, wasCorrect, timeTakenMs);
-    skillLevelRef.current = newSkill;
-    setSkillLevel(newSkill);
+    if (!testPracticeMode) {
+      const newSkill = calculateNextSkillLevel(skillLevelRef.current, wasCorrect, timeTakenMs);
+      skillLevelRef.current = newSkill;
+      setSkillLevel(newSkill);
 
-    // Persist skill level update to Supabase (fire and forget)
-    if (currentUser && sessionTopicRef.current) {
-      updateSkillLevel(
-        currentUser.id,
-        modeSlug,
-        sessionTopicRef.current,
-        wasCorrect,
-        timeTakenMs,
-      ).catch(() => {
-        // Non-critical
-      });
+      // Persist skill level update to Supabase (fire and forget)
+      if (currentUser && sessionTopicRef.current) {
+        updateSkillLevel(
+          currentUser.id,
+          modeSlug,
+          sessionTopicRef.current,
+          wasCorrect,
+          timeTakenMs,
+        ).catch(() => {
+          // Non-critical
+        });
+      }
     }
 
     // If wrong, fetch AI explanation (skip for local modes which use built-in explanations)
@@ -477,6 +513,7 @@ export default function PracticePage() {
     setQuestions([]);
     setNvrQuestions([]);
     setCubeNetQuestions([]);
+    setSpatialQuestions([]);
     setCurrentQuestionIndex(0);
     setAnswers([]);
     setSelectedAnswer(null);
@@ -572,7 +609,7 @@ export default function PracticePage() {
     return (
       <div className="flex flex-col items-center gap-8 py-8">
         <h2 className="font-mono text-3xl font-bold tracking-widest text-neon-cyan text-glow-cyan">
-          SESSION COMPLETE
+          {testPracticeMode ? "TEST PRACTICE RESULTS" : "SESSION COMPLETE"}
         </h2>
 
         <Card className="w-full max-w-md border-border bg-surface">
@@ -597,9 +634,9 @@ export default function PracticePage() {
               </Badge>
               <Badge
                 variant="outline"
-                className="border-neon-cyan/40 font-mono text-xs text-neon-cyan"
+                className={testPracticeMode ? "border-neon-pink/40 font-mono text-xs text-neon-pink" : "border-neon-cyan/40 font-mono text-xs text-neon-cyan"}
               >
-                Level {skillLevel.toFixed(1)}
+                {testPracticeMode ? "Test Mode" : `Level ${skillLevel.toFixed(1)}`}
               </Badge>
             </div>
 
@@ -653,12 +690,21 @@ export default function PracticePage() {
           >
             {modeConfig.label}
           </span>
-          <Badge
-            variant="outline"
-            className="border-neon-cyan/30 font-mono text-[10px] text-neon-cyan"
-          >
-            Lvl {skillLevel.toFixed(1)}
-          </Badge>
+          {testPracticeMode ? (
+            <Badge
+              variant="outline"
+              className="border-neon-pink/40 font-mono text-[10px] text-neon-pink"
+            >
+              TEST MODE
+            </Badge>
+          ) : (
+            <Badge
+              variant="outline"
+              className="border-neon-cyan/30 font-mono text-[10px] text-neon-cyan"
+            >
+              Lvl {skillLevel.toFixed(1)}
+            </Badge>
+          )}
         </div>
 
         <Badge
@@ -680,7 +726,7 @@ export default function PracticePage() {
             {display}
           </span>
 
-          <Button
+          {!testPracticeMode && <Button
             variant="ghost"
             size="sm"
             onClick={handlePauseToggle}
@@ -706,9 +752,26 @@ export default function PracticePage() {
                 <path d="M5.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75A.75.75 0 0 0 7.25 3h-1.5ZM12.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75h-1.5Z" />
               </svg>
             )}
-          </Button>
+          </Button>}
         </div>
       </div>
+
+      {/* ---- Test Practice toggle ---- */}
+      {!showExplanation && currentQuestionIndex === 0 && selectedAnswer === null && (
+        <div className="flex justify-end">
+          <button
+            onClick={() => setTestPracticeMode((prev) => !prev)}
+            className={[
+              "rounded-full px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider transition-all",
+              testPracticeMode
+                ? "bg-neon-pink/20 text-neon-pink border border-neon-pink/40"
+                : "bg-muted/30 text-muted-foreground border border-border/40 hover:text-foreground",
+            ].join(" ")}
+          >
+            {testPracticeMode ? "Test Mode ON" : "Test Mode"}
+          </button>
+        </div>
+      )}
 
       {/* Progress bar */}
       <Progress
@@ -723,9 +786,15 @@ export default function PracticePage() {
           selectedAnswer={selectedAnswer}
           onSelectAnswer={handleSelectAnswer}
         />
-      ) : isCubeNetMode && cubeNetQuestions[currentQuestionIndex] ? (
+      ) : isSpatialMode && currentQuestion?.questionType === "cube_net" && cubeNetQuestions[currentQuestionIndex] ? (
         <CubeNetQuestionDisplay
           question={cubeNetQuestions[currentQuestionIndex]}
+          selectedAnswer={selectedAnswer}
+          onSelectAnswer={handleSelectAnswer}
+        />
+      ) : isSpatialMode && spatialQuestions[currentQuestionIndex - cubeNetQuestions.length] ? (
+        <SpatialQuestionDisplay
+          question={spatialQuestions[currentQuestionIndex - cubeNetQuestions.length]}
           selectedAnswer={selectedAnswer}
           onSelectAnswer={handleSelectAnswer}
         />

@@ -87,16 +87,6 @@ const BASELINE_SUBJECTS: SubjectConfig[] = [
       { category: "english", topic: "spelling and vocabulary" },
       { category: "english", topic: "grammar and punctuation" },
       { category: "english", topic: "sentence completion" },
-    ],
-  },
-  {
-    mode: "comprehension",
-    label: "Comprehension",
-    icon: "\uD83D\uDDD2\uFE0F",
-    colorClass: "text-neon-pink",
-    glowClass: "text-glow-pink",
-    barColor: "oklch(0.75 0.18 340)",
-    topics: [
       { category: "english", topic: "reading comprehension" },
       { category: "english", topic: "inference and deduction" },
     ],

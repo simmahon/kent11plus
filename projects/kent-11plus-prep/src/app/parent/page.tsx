@@ -28,9 +28,9 @@ import {
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
-/** Subjects shown in comparisons (excludes cube-nets, random-mix). */
+/** Subjects shown in comparisons (excludes spatial-reasoning, random-mix). */
 const COMPARE_MODES = PRACTICE_MODES.filter(
-  (m) => !["cube-nets", "random-mix"].includes(m.id),
+  (m) => !["spatial-reasoning", "random-mix"].includes(m.id),
 );
 
 /** oklch colours for chart bars, keyed by mode. */
@@ -38,8 +38,8 @@ const MODE_BAR_COLORS: Record<string, string> = {
   "verbal-reasoning": "oklch(0.78 0.18 195)",
   maths: "oklch(0.75 0.18 145)",
   english: "oklch(0.78 0.15 75)",
-  comprehension: "oklch(0.75 0.18 340)",
   "non-verbal-reasoning": "oklch(0.72 0.2 300)",
+  "spatial-reasoning": "oklch(0.72 0.2 300)",
 };
 
 /* ------------------------------------------------------------------ */

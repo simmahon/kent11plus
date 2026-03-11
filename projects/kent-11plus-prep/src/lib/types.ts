@@ -8,8 +8,7 @@ export type PracticeMode =
   | "non-verbal-reasoning"
   | "maths"
   | "english"
-  | "comprehension"
-  | "cube-nets"
+  | "spatial-reasoning"
   | "random-mix";
 
 /** Metadata that drives the mode-selection cards on the landing page. */
