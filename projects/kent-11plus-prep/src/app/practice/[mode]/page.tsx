@@ -890,31 +890,53 @@ export default function PracticePage() {
               }
 
               return (
-                <button
-                  key={idx}
-                  disabled={hasAnswered}
-                  onClick={() => handleSelectAnswer(idx)}
-                  className={[
-                    "group flex w-full items-center gap-4 rounded-lg border px-4 py-3 text-left transition-all duration-200",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    "disabled:cursor-default",
-                    optionStyles,
-                  ].join(" ")}
-                >
-                  <span
+                <div key={idx} className="relative">
+                  <button
+                    disabled={hasAnswered}
+                    onClick={() => handleSelectAnswer(idx)}
                     className={[
-                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
-                      hasAnswered && isSelected && isCorrectOption
-                        ? "border-neon-green/60 text-neon-green"
-                        : hasAnswered && isSelected && !isCorrectOption
-                          ? "border-neon-amber/60 text-neon-amber"
-                          : "border-border/60 text-muted-foreground group-hover:text-foreground",
+                      "group flex w-full items-center gap-4 rounded-lg border px-4 py-3 text-left transition-all duration-200",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                      "disabled:cursor-default",
+                      optionStyles,
                     ].join(" ")}
                   >
-                    {OPTION_LABELS[idx]}
-                  </span>
-                  <span className="text-sm">{option}</span>
-                </button>
+                    <span
+                      className={[
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
+                        hasAnswered && isSelected && isCorrectOption
+                          ? "border-neon-green/60 text-neon-green"
+                          : hasAnswered && isSelected && !isCorrectOption
+                            ? "border-neon-amber/60 text-neon-amber"
+                            : "border-border/60 text-muted-foreground group-hover:text-foreground",
+                      ].join(" ")}
+                    >
+                      {OPTION_LABELS[idx]}
+                    </span>
+                    <span className="text-sm flex-1">{option}</span>
+                    {hasAnswered && isSelected && isCorrectOption && (
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleNext();
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.stopPropagation();
+                            handleNext();
+                          }
+                        }}
+                        className="ml-auto shrink-0 rounded-md bg-neon-cyan px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90 transition-colors cursor-pointer"
+                      >
+                        {currentQuestionIndex < totalQuestions - 1
+                          ? "Next →"
+                          : "Results →"}
+                      </span>
+                    )}
+                  </button>
+                </div>
               );
             })}
           </div>
