@@ -34,7 +34,7 @@ interface SubjectConfig {
   icon: string;
   colorClass: string;
   glowClass: string;
-  /** oklch color for the results bar */
+  /** hex color for the results bar */
   barColor: string;
   topics: { category: string; topic: string }[];
 }
@@ -45,8 +45,8 @@ const BASELINE_SUBJECTS: SubjectConfig[] = [
     label: "Verbal Reasoning",
     icon: "\uD83E\uDDE0",
     colorClass: "text-neon-cyan",
-    glowClass: "text-glow-cyan",
-    barColor: "oklch(0.78 0.18 195)",
+    glowClass: "",
+    barColor: "#6b73f5",
     topics: [
       { category: "verbal_reasoning", topic: "synonyms and antonyms" },
       { category: "verbal_reasoning", topic: "odd one out" },
@@ -63,8 +63,8 @@ const BASELINE_SUBJECTS: SubjectConfig[] = [
     label: "Mathematics",
     icon: "\uD83D\uDCCA",
     colorClass: "text-neon-green",
-    glowClass: "text-glow-green",
-    barColor: "oklch(0.75 0.18 145)",
+    glowClass: "",
+    barColor: "#34d399",
     topics: [
       {
         category: "mathematics",
@@ -81,8 +81,8 @@ const BASELINE_SUBJECTS: SubjectConfig[] = [
     label: "English",
     icon: "\uD83D\uDCDA",
     colorClass: "text-neon-amber",
-    glowClass: "text-glow-amber",
-    barColor: "oklch(0.78 0.15 75)",
+    glowClass: "",
+    barColor: "#fbbf24",
     topics: [
       { category: "english", topic: "spelling and vocabulary" },
       { category: "english", topic: "grammar and punctuation" },
@@ -412,7 +412,7 @@ export default function BaselinePage() {
   if (!currentUser) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Select a user first
         </p>
         <p className="text-sm text-muted-foreground">
@@ -433,8 +433,8 @@ export default function BaselinePage() {
       <div className="flex flex-col items-center gap-8 py-8">
         <div className="flex flex-col items-center gap-2 text-center">
           <span className="text-5xl">{"\uD83C\uDFAF"}</span>
-          <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-cyan text-glow-cyan sm:text-4xl">
-            BASELINE TEST
+          <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-cyan sm:text-4xl">
+            Baseline Test
           </h1>
           <p className="max-w-md text-sm text-muted-foreground">
             This adaptive test finds your starting level across all 4 Kent
@@ -448,7 +448,7 @@ export default function BaselinePage() {
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\uD83D\uDCDD"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-foreground">
+                <p className="font-sans text-sm font-bold text-foreground">
                   24 questions
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -462,7 +462,7 @@ export default function BaselinePage() {
                 <div key={s.mode} className="flex items-center gap-2">
                   <span className="text-base">{s.icon}</span>
                   <span
-                    className={`font-mono text-xs font-bold ${s.colorClass}`}
+                    className={`font-sans text-xs font-bold ${s.colorClass}`}
                   >
                     {s.label}
                   </span>
@@ -473,7 +473,7 @@ export default function BaselinePage() {
             <div className="flex items-center gap-3 border-t border-border/40 pt-4">
               <span className="text-xl">{"\u23F1\uFE0F"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-foreground">
+                <p className="font-sans text-sm font-bold text-foreground">
                   No time pressure
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -485,7 +485,7 @@ export default function BaselinePage() {
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\uD83C\uDFAF"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-foreground">
+                <p className="font-sans text-sm font-bold text-foreground">
                   Adaptive difficulty
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -498,14 +498,14 @@ export default function BaselinePage() {
 
         <div className="flex w-full max-w-md flex-col gap-3">
           <Button
-            className="w-full bg-neon-cyan font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+            className="w-full bg-neon-cyan font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
             onClick={handleStart}
           >
             Start Baseline Test
           </Button>
           <Button
             variant="outline"
-            className="w-full font-mono text-xs uppercase tracking-wider"
+            className="w-full font-sans text-xs uppercase tracking-wider"
             onClick={() => router.push("/")}
           >
             Back to Home
@@ -531,7 +531,7 @@ export default function BaselinePage() {
             }}
           />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Saving your results...
         </p>
       </div>
@@ -567,8 +567,8 @@ export default function BaselinePage() {
       <div className="flex flex-col items-center gap-8 py-8">
         <div className="flex flex-col items-center gap-2 text-center">
           <span className="text-5xl">{"\uD83C\uDFAF"}</span>
-          <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-cyan text-glow-cyan">
-            BASELINE COMPLETE
+          <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-cyan">
+            Baseline Complete
           </h1>
           <p className="text-sm text-muted-foreground">
             {totalCorrect}/{totalQuestions} correct ({totalPct}%)
@@ -577,7 +577,7 @@ export default function BaselinePage() {
 
         <Card className="w-full max-w-md border-border bg-surface">
           <CardContent className="flex flex-col gap-5 px-6 py-6">
-            <p className="text-center font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-center font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Your Starting Levels
             </p>
 
@@ -592,18 +592,18 @@ export default function BaselinePage() {
                     <div className="flex items-center gap-2">
                       <span className="text-base">{subject.icon}</span>
                       <span
-                        className={`font-mono text-xs font-bold ${subject.colorClass}`}
+                        className={`font-sans text-xs font-bold ${subject.colorClass}`}
                       >
                         {subject.label}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="font-sans text-xs text-muted-foreground">
                         {score}/{QUESTIONS_PER_SUBJECT}
                       </span>
                       <Badge
                         variant="outline"
-                        className={`font-mono text-[10px] ${subject.colorClass}`}
+                        className={`font-sans text-[10px] ${subject.colorClass}`}
                       >
                         {skill.toFixed(1)}
                       </Badge>
@@ -626,7 +626,7 @@ export default function BaselinePage() {
 
         <Card className="w-full max-w-md border-neon-cyan/20 bg-neon-cyan/5">
           <CardContent className="flex flex-col gap-2 px-6 py-4">
-            <p className="font-mono text-sm text-foreground">{message}</p>
+            <p className="font-sans text-sm text-foreground">{message}</p>
             <p className="text-xs text-muted-foreground">
               Focus area:{" "}
               <span className={`font-bold ${weakest.colorClass}`}>
@@ -639,14 +639,14 @@ export default function BaselinePage() {
 
         <div className="flex w-full max-w-md flex-col gap-3">
           <Button
-            className="w-full bg-neon-cyan font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+            className="w-full bg-neon-cyan font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
             onClick={() => router.push("/")}
           >
             Start Practising
           </Button>
           <Button
             variant="outline"
-            className="w-full font-mono text-xs uppercase tracking-wider"
+            className="w-full font-sans text-xs uppercase tracking-wider"
             onClick={() => router.push("/dashboard")}
           >
             View Dashboard
@@ -672,20 +672,20 @@ export default function BaselinePage() {
         <div className="flex flex-col items-center gap-2 text-center">
           <span className="text-4xl">{completedSubject.icon}</span>
           <h2
-            className={`font-mono text-xl font-bold tracking-wider ${completedSubject.colorClass} ${completedSubject.glowClass}`}
+            className={`font-sans text-xl font-bold tracking-wider ${completedSubject.colorClass} ${completedSubject.glowClass}`}
           >
             {completedSubject.label} Complete
           </h2>
           <div className="flex items-center gap-3">
             <Badge
               variant="outline"
-              className="font-mono text-xs text-muted-foreground"
+              className="font-sans text-xs text-muted-foreground"
             >
               {score}/{QUESTIONS_PER_SUBJECT} correct
             </Badge>
             <Badge
               variant="outline"
-              className={`font-mono text-xs ${completedSubject.colorClass}`}
+              className={`font-sans text-xs ${completedSubject.colorClass}`}
             >
               Level {skill.toFixed(1)}
             </Badge>
@@ -699,12 +699,12 @@ export default function BaselinePage() {
 
         <Card className="w-full max-w-sm border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-3 px-6 py-6">
-            <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <p className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
               Next up
             </p>
             <span className="text-4xl">{nextSubject.icon}</span>
             <span
-              className={`font-mono text-lg font-bold tracking-wide ${nextSubject.colorClass} ${nextSubject.glowClass}`}
+              className={`font-sans text-lg font-bold tracking-wide ${nextSubject.colorClass} ${nextSubject.glowClass}`}
             >
               {nextSubject.label}
             </span>
@@ -715,7 +715,7 @@ export default function BaselinePage() {
         </Card>
 
         <Button
-          className="w-full max-w-sm bg-neon-cyan font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+          className="w-full max-w-sm bg-neon-cyan font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
           onClick={handleContinueToNextSubject}
         >
           Continue
@@ -738,7 +738,7 @@ export default function BaselinePage() {
             }}
           />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Loading {currentSubject.label} questions...
         </p>
       </div>
@@ -749,12 +749,12 @@ export default function BaselinePage() {
   if (batchError) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Something went wrong
         </p>
         <p className="text-sm text-muted-foreground">{batchError}</p>
         <Button
-          className="bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+          className="bg-neon-cyan font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
           onClick={handleRetryBatch}
         >
           Try Again
@@ -778,7 +778,7 @@ export default function BaselinePage() {
             {currentSubject.icon}
           </span>
           <span
-            className={`font-mono text-sm font-bold tracking-wide ${currentSubject.colorClass}`}
+            className={`font-sans text-sm font-bold tracking-wide ${currentSubject.colorClass}`}
           >
             {currentSubject.label}
           </span>
@@ -786,14 +786,14 @@ export default function BaselinePage() {
 
         <Badge
           variant="outline"
-          className="border-border/60 font-mono text-xs text-muted-foreground"
+          className="border-border/60 font-sans text-xs text-muted-foreground"
         >
           {currentSubject.icon} {questionIdx + 1}/{QUESTIONS_PER_SUBJECT}
         </Badge>
 
         <Badge
           variant="outline"
-          className="border-border/60 font-mono text-xs text-muted-foreground"
+          className="border-border/60 font-sans text-xs text-muted-foreground"
         >
           Overall {globalQuestionIndex + 1}/{totalQuestions}
         </Badge>
@@ -868,7 +868,7 @@ export default function BaselinePage() {
             >
               <span
                 className={[
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
+                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-sans text-xs font-bold",
                   hasAnswered && isSelected && isCorrectOption
                     ? "border-neon-green/60 text-neon-green"
                     : hasAnswered && isSelected && !isCorrectOption
@@ -897,10 +897,10 @@ export default function BaselinePage() {
           <CardContent className="flex items-center justify-between px-6 py-4">
             <span
               className={[
-                "font-mono text-sm font-bold uppercase tracking-wider",
+                "font-sans text-sm font-bold uppercase tracking-wider",
                 isCorrect
-                  ? "text-neon-green text-glow-green"
-                  : "text-neon-amber text-glow-amber",
+                  ? "text-neon-green"
+                  : "text-neon-amber",
               ].join(" ")}
             >
               {isCorrect
@@ -909,7 +909,7 @@ export default function BaselinePage() {
             </span>
             <Button
               onClick={handleNext}
-              className="bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+              className="bg-neon-cyan font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
             >
               Next
             </Button>

@@ -14,8 +14,8 @@ export default function OfflinePage() {
 
       {/* Heading */}
       <div className="flex flex-col items-center gap-2">
-        <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-amber text-glow-amber sm:text-4xl">
-          YOU&apos;RE OFFLINE
+        <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-amber sm:text-4xl">
+          You're Offline
         </h1>
         <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
           No internet connection detected. Some features need a network to work,
@@ -25,7 +25,7 @@ export default function OfflinePage() {
 
       {/* Offline-ready modes */}
       <div className="flex w-full max-w-sm flex-col gap-3">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-neon-green text-glow-green">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wide text-neon-green">
           Available Offline
         </h2>
 
@@ -37,7 +37,7 @@ export default function OfflinePage() {
             {"\uD83E\uDDE0"}
           </span>
           <div className="flex flex-col items-start gap-0.5">
-            <span className="font-mono text-sm font-bold text-neon-green">
+            <span className="font-sans text-sm font-bold text-neon-green">
               Non-Verbal Reasoning
             </span>
             <span className="text-xs text-muted-foreground">
@@ -54,7 +54,7 @@ export default function OfflinePage() {
             {"\uD83E\uDDE9"}
           </span>
           <div className="flex flex-col items-start gap-0.5">
-            <span className="font-mono text-sm font-bold text-neon-green">
+            <span className="font-sans text-sm font-bold text-neon-green">
               Spatial Reasoning
             </span>
             <span className="text-xs text-muted-foreground">
@@ -67,13 +67,13 @@ export default function OfflinePage() {
       {/* Retry button */}
       <button
         onClick={() => window.location.reload()}
-        className="rounded-lg bg-neon-cyan px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-background transition-all duration-300 hover:bg-neon-cyan/90 hover:shadow-[0_0_20px_rgba(0,220,255,0.3)]"
+        className="rounded-lg bg-neon-cyan px-8 py-3 font-sans text-xs font-bold uppercase tracking-wider text-background transition-all duration-300 hover:bg-neon-cyan/90 hover:shadow-[0_0_20px_rgba(107,115,245,0.3)]"
       >
         Try Again
       </button>
 
       {/* Connection status hint */}
-      <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
+      <p className="text-[10px] uppercase tracking-wide text-muted-foreground/60">
         This page will auto-retry when your connection is restored
       </p>
     </div>

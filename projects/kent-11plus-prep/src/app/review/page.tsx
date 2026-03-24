@@ -174,7 +174,7 @@ export default function ReviewPage() {
   if (!currentUser) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Select a user first
         </p>
         <Button variant="outline" onClick={() => router.push("/")}>
@@ -198,13 +198,13 @@ export default function ReviewPage() {
         {/* Top bar */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-sm font-bold tracking-wider text-neon-purple text-glow-purple">
-              REVIEW SESSION
+            <span className="font-sans text-sm font-bold tracking-wider text-neon-purple">
+              Review Session
             </span>
           </div>
           <Badge
             variant="outline"
-            className="border-border/60 font-mono text-xs text-muted-foreground"
+            className="border-border/60 font-sans text-xs text-muted-foreground"
           >
             {sessionIdx + 1}/{dueQuestions.length}
           </Badge>
@@ -222,14 +222,14 @@ export default function ReviewPage() {
         <div className="flex gap-2">
           <Badge
             variant="outline"
-            className={`font-mono text-[10px] ${getModeColor(question.mode)}`}
+            className={`font-sans text-[10px] ${getModeColor(question.mode)}`}
           >
             {getModeLabel(question.mode)}
           </Badge>
           {question.topic && (
             <Badge
               variant="outline"
-              className="border-border/60 font-mono text-[10px] text-muted-foreground"
+              className="border-border/60 font-sans text-[10px] text-muted-foreground"
             >
               {question.topic}
             </Badge>
@@ -281,7 +281,7 @@ export default function ReviewPage() {
               >
                 <span
                   className={[
-                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
+                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-sans text-xs font-bold",
                     hasAnswered && isSelected && isCorrectOption
                       ? "border-neon-green/60 text-neon-green"
                       : hasAnswered && isSelected && !isCorrectOption
@@ -311,10 +311,10 @@ export default function ReviewPage() {
               <div className="flex items-center justify-between">
                 <span
                   className={[
-                    "font-mono text-sm font-bold uppercase tracking-wider",
+                    "font-sans text-sm font-bold uppercase tracking-wider",
                     isCorrect
-                      ? "text-neon-green text-glow-green"
-                      : "text-neon-amber text-glow-amber",
+                      ? "text-neon-green"
+                      : "text-neon-amber",
                   ].join(" ")}
                 >
                   {isCorrect
@@ -323,7 +323,7 @@ export default function ReviewPage() {
                 </span>
                 <Button
                   onClick={handleSessionNext}
-                  className="bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+                  className="bg-neon-cyan font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
                 >
                   Next
                 </Button>
@@ -359,13 +359,13 @@ export default function ReviewPage() {
 
     return (
       <div className="flex flex-col items-center gap-8 py-8">
-        <h2 className="font-mono text-3xl font-bold tracking-widest text-neon-purple text-glow-purple">
-          REVIEW COMPLETE
+        <h2 className="font-sans text-3xl font-bold tracking-wide text-neon-purple">
+          Review Complete
         </h2>
 
         <Card className="w-full max-w-md border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-6 px-6 py-8">
-            <span className="font-mono text-6xl font-bold tabular-nums text-neon-green text-glow-green">
+            <span className="font-sans text-6xl font-bold tabular-nums text-neon-green">
               {sessionCorrect}/{total}
             </span>
             <span className="text-sm text-muted-foreground">
@@ -373,7 +373,7 @@ export default function ReviewPage() {
             </span>
             <Progress value={pct} className="h-2 w-full" />
 
-            <p className="text-center font-mono text-sm text-neon-amber text-glow-amber">
+            <p className="text-center font-sans text-sm text-neon-amber">
               {pct === 100
                 ? "Perfect recall! Those are locked in."
                 : pct >= 70
@@ -383,14 +383,14 @@ export default function ReviewPage() {
 
             <div className="flex w-full flex-col gap-3 pt-2">
               <Button
-                className="w-full bg-neon-cyan font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+                className="w-full bg-neon-cyan font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
                 onClick={handleBackToBrowse}
               >
                 Back to Review
               </Button>
               <Button
                 variant="outline"
-                className="w-full font-mono text-xs uppercase tracking-wider"
+                className="w-full font-sans text-xs uppercase tracking-wider"
                 onClick={() => router.push("/")}
               >
                 Back to Home
@@ -419,7 +419,7 @@ export default function ReviewPage() {
             }}
           />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Loading review data...
         </p>
       </div>
@@ -430,7 +430,7 @@ export default function ReviewPage() {
     <div className="flex flex-col gap-8 py-4">
       {/* ---- Header ---- */}
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-purple text-glow-purple sm:text-4xl">
+        <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-purple sm:text-4xl">
           REVIEW
         </h1>
         <p className="text-sm text-muted-foreground">
@@ -442,30 +442,30 @@ export default function ReviewPage() {
       <div className="grid grid-cols-3 gap-3">
         <Card className="border-neon-amber/20 bg-surface">
           <CardContent className="flex flex-col items-center gap-1 px-3 py-3">
-            <span className="font-mono text-2xl font-bold tabular-nums text-neon-amber text-glow-amber">
+            <span className="font-sans text-2xl font-bold tabular-nums text-neon-amber">
               {stats.due}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="font-sans text-[10px] uppercase tracking-wider text-muted-foreground">
               Due now
             </span>
           </CardContent>
         </Card>
         <Card className="border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-1 px-3 py-3">
-            <span className="font-mono text-2xl font-bold tabular-nums text-muted-foreground">
+            <span className="font-sans text-2xl font-bold tabular-nums text-muted-foreground">
               {stats.upcoming}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="font-sans text-[10px] uppercase tracking-wider text-muted-foreground">
               Upcoming
             </span>
           </CardContent>
         </Card>
         <Card className="border-neon-green/20 bg-surface">
           <CardContent className="flex flex-col items-center gap-1 px-3 py-3">
-            <span className="font-mono text-2xl font-bold tabular-nums text-neon-green text-glow-green">
+            <span className="font-sans text-2xl font-bold tabular-nums text-neon-green">
               {stats.mastered}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="font-sans text-[10px] uppercase tracking-wider text-muted-foreground">
               Mastered
             </span>
           </CardContent>
@@ -475,7 +475,7 @@ export default function ReviewPage() {
       {/* ---- Start review session ---- */}
       {stats.due > 0 && (
         <Button
-          className="w-full bg-neon-purple font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-purple/90"
+          className="w-full bg-neon-purple font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-purple/90"
           onClick={handleStartSession}
           disabled={sessionLoading}
         >
@@ -490,13 +490,13 @@ export default function ReviewPage() {
         <Card className="border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-3 px-6 py-8 text-center">
             <span className="text-4xl">{"\u2705"}</span>
-            <p className="font-mono text-sm text-muted-foreground">
+            <p className="font-sans text-sm text-muted-foreground">
               No wrong answers yet! Start practising to build your review
               list.
             </p>
             <Button
               variant="outline"
-              className="font-mono text-xs uppercase tracking-wider"
+              className="font-sans text-xs uppercase tracking-wider"
               onClick={() => router.push("/")}
             >
               Go Practise
@@ -509,13 +509,13 @@ export default function ReviewPage() {
       {wrongAnswers.length > 0 && (
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <span className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
               Filter:
             </span>
             <button
               onClick={() => setModeFilter(null)}
               className={[
-                "rounded-md border px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider transition-colors",
+                "rounded-md border px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-wider transition-colors",
                 modeFilter === null
                   ? "border-neon-purple/60 bg-neon-purple/10 text-neon-purple"
                   : "border-border/50 text-muted-foreground hover:border-border",
@@ -534,7 +534,7 @@ export default function ReviewPage() {
                     setModeFilter(modeFilter === mode ? null : mode)
                   }
                   className={[
-                    "rounded-md border px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider transition-colors",
+                    "rounded-md border px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-wider transition-colors",
                     modeFilter === mode
                       ? `border-current/30 bg-current/5 ${getModeColor(mode)}`
                       : "border-border/50 text-muted-foreground hover:border-border",
@@ -563,14 +563,14 @@ export default function ReviewPage() {
                       <div className="flex flex-wrap gap-1.5">
                         <Badge
                           variant="outline"
-                          className={`font-mono text-[9px] ${getModeColor(qa.mode)}`}
+                          className={`font-sans text-[9px] ${getModeColor(qa.mode)}`}
                         >
                           {getModeLabel(qa.mode)}
                         </Badge>
                         {qa.topic && (
                           <Badge
                             variant="outline"
-                            className="border-border/60 font-mono text-[9px] text-muted-foreground"
+                            className="border-border/60 font-sans text-[9px] text-muted-foreground"
                           >
                             {qa.topic}
                           </Badge>
@@ -619,7 +619,7 @@ export default function ReviewPage() {
                     <div className="flex items-center justify-between pt-0.5">
                       <Badge
                         variant="outline"
-                        className={`font-mono text-[9px] ${status.className}`}
+                        className={`font-sans text-[9px] ${status.className}`}
                       >
                         {status.label}
                       </Badge>

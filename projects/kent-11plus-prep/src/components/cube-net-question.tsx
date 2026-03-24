@@ -129,14 +129,14 @@ function SymbolSVG({
 /* ------------------------------------------------------------------ */
 
 const SYMBOL_COLORS: Record<CubeSymbol, string> = {
-  circle: "oklch(0.78 0.18 195)",    // cyan
-  triangle: "oklch(0.75 0.2 340)",   // pink
-  star: "oklch(0.8 0.18 85)",        // amber
-  cross: "oklch(0.8 0.2 145)",       // green
-  heart: "oklch(0.7 0.2 15)",        // red
-  diamond: "oklch(0.72 0.2 300)",    // purple
-  dots: "oklch(0.75 0.15 230)",      // blue
-  stripes: "oklch(0.7 0.12 60)",     // orange
+  circle: "#6b73f5",    // cyan
+  triangle: "#f472b6",   // pink
+  star: "#fbbf24",        // amber
+  cross: "#34d399",       // green
+  heart: "#f87171",        // red
+  diamond: "#8b9bff",    // purple
+  dots: "#6b73f5",      // blue
+  stripes: "#fb923c",     // orange
 };
 
 /* ------------------------------------------------------------------ */
@@ -182,8 +182,8 @@ function FlatNet({
               y={y}
               width={s}
               height={s}
-              fill="oklch(0.15 0.015 270)"
-              stroke="oklch(0.35 0.03 270)"
+              fill="#1b1a28"
+              stroke="#363543"
               strokeWidth={1.5}
               rx={3}
             />
@@ -258,16 +258,16 @@ function IsometricCube({
       <defs>
         {/* Subtle lighting gradients */}
         <linearGradient id={`top_${uid}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="oklch(0.22 0.015 270)" />
-          <stop offset="100%" stopColor="oklch(0.18 0.015 270)" />
+          <stop offset="0%" stopColor="#232532" />
+          <stop offset="100%" stopColor="#1e1e2a" />
         </linearGradient>
         <linearGradient id={`left_${uid}`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="oklch(0.14 0.015 270)" />
-          <stop offset="100%" stopColor="oklch(0.16 0.015 270)" />
+          <stop offset="0%" stopColor="#16151f" />
+          <stop offset="100%" stopColor="#1a1925" />
         </linearGradient>
         <linearGradient id={`right_${uid}`} x1="1" y1="0" x2="0" y2="0">
-          <stop offset="0%" stopColor="oklch(0.12 0.015 270)" />
-          <stop offset="100%" stopColor="oklch(0.15 0.015 270)" />
+          <stop offset="0%" stopColor="#131220" />
+          <stop offset="100%" stopColor="#1b1a28" />
         </linearGradient>
       </defs>
 
@@ -275,21 +275,21 @@ function IsometricCube({
       <polygon
         points={poly([top, topRight, center, topLeft])}
         fill={`url(#top_${uid})`}
-        stroke="oklch(0.35 0.03 270)"
+        stroke="#363543"
         strokeWidth={1}
       />
       {/* Left face */}
       <polygon
         points={poly([topLeft, center, bottom, bottomLeft])}
         fill={`url(#left_${uid})`}
-        stroke="oklch(0.35 0.03 270)"
+        stroke="#363543"
         strokeWidth={1}
       />
       {/* Right face */}
       <polygon
         points={poly([center, topRight, bottomRight, bottom])}
         fill={`url(#right_${uid})`}
-        stroke="oklch(0.35 0.03 270)"
+        stroke="#363543"
         strokeWidth={1}
       />
 
@@ -384,7 +384,7 @@ export function CubeNetQuestionDisplay({
             >
               <span
                 className={[
-                  "font-mono text-xs font-bold",
+                  "font-sans text-xs font-bold",
                   hasAnswered && isSelected && isCorrectOption
                     ? "text-neon-green"
                     : hasAnswered && isSelected && !isCorrectOption

@@ -35,8 +35,8 @@ import {
   type DayActivity,
 } from "@/lib/supabase/sessions";
 
-const NEON_CYAN = "oklch(0.78 0.18 195)";
-const NEON_GREEN = "oklch(0.8 0.2 145)";
+const NEON_CYAN = "#6b73f5";
+const NEON_GREEN = "#34d399";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -84,7 +84,7 @@ function ChartTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-lg border border-border bg-surface px-3 py-2 font-mono text-xs shadow-lg">
+    <div className="rounded-lg border border-border bg-surface px-3 py-2 font-sans text-xs shadow-lg">
       <p className="text-muted-foreground">{label}</p>
       <p className="font-bold text-neon-cyan">{payload[0].value}</p>
     </div>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
         <div className="relative size-16">
           <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-neon-cyan" />
         </div>
-        <p className="font-mono text-sm text-muted-foreground animate-pulse">
+        <p className="font-sans text-sm text-muted-foreground animate-pulse">
           Loading dashboard...
         </p>
       </div>
@@ -151,8 +151,8 @@ export default function DashboardPage() {
       {/* ---- Header ---- */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-mono text-2xl font-bold tracking-widest text-neon-cyan text-glow-cyan sm:text-3xl">
-            {currentUser ? `${currentUser.name.toUpperCase()}'S DASHBOARD` : "DASHBOARD"}
+          <h1 className="font-sans text-2xl font-bold tracking-wide text-neon-cyan sm:text-3xl">
+            {currentUser ? `${currentUser.name}'s Dashboard` : "Dashboard"}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Track progress and identify areas for improvement
@@ -161,13 +161,13 @@ export default function DashboardPage() {
         <div className="flex gap-2">
           <Link
             href="/parent"
-            className="rounded-lg border border-neon-green/30 bg-surface px-4 py-2 font-mono text-xs text-neon-green/80 transition-colors hover:bg-surface-hover hover:text-neon-green"
+            className="rounded-lg border border-neon-green/30 bg-surface px-4 py-2 font-sans text-xs text-neon-green/80 transition-colors hover:bg-surface-hover hover:text-neon-green"
           >
             Parent View
           </Link>
           <Link
             href="/"
-            className="rounded-lg border border-border/50 bg-surface px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
+            className="rounded-lg border border-border/50 bg-surface px-4 py-2 font-sans text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
           >
             Practice
           </Link>
@@ -214,13 +214,13 @@ export default function DashboardPage() {
           <TabsList className="mb-4 bg-surface">
             <TabsTrigger
               value="activity"
-              className="font-mono text-xs data-[state=active]:text-neon-cyan"
+              className="font-sans text-xs data-[state=active]:text-neon-cyan"
             >
               Activity
             </TabsTrigger>
             <TabsTrigger
               value="accuracy"
-              className="font-mono text-xs data-[state=active]:text-neon-cyan"
+              className="font-sans text-xs data-[state=active]:text-neon-cyan"
             >
               Accuracy Trend
             </TabsTrigger>
@@ -229,7 +229,7 @@ export default function DashboardPage() {
           <TabsContent value="activity">
             <Card className="border-border bg-surface">
               <CardContent className="pt-6">
-                <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <h3 className="mb-4 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   Questions This Week
                 </h3>
                 <div className="h-64">
@@ -237,16 +237,16 @@ export default function DashboardPage() {
                     <BarChart data={weeklyActivity}>
                       <CartesianGrid
                         strokeDasharray="3 3"
-                        stroke="oklch(0.25 0.03 280 / 0.4)"
+                        stroke="#363543"
                       />
                       <XAxis
                         dataKey="day"
-                        tick={{ fill: "oklch(0.6 0.02 270)", fontSize: 12 }}
+                        tick={{ fill: "#9799a6", fontSize: 12 }}
                         axisLine={false}
                         tickLine={false}
                       />
                       <YAxis
-                        tick={{ fill: "oklch(0.6 0.02 270)", fontSize: 12 }}
+                        tick={{ fill: "#9799a6", fontSize: 12 }}
                         axisLine={false}
                         tickLine={false}
                       />
@@ -267,7 +267,7 @@ export default function DashboardPage() {
           <TabsContent value="accuracy">
             <Card className="border-border bg-surface">
               <CardContent className="pt-6">
-                <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <h3 className="mb-4 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   Accuracy Over Time
                 </h3>
                 <div className="h-64">
@@ -275,17 +275,17 @@ export default function DashboardPage() {
                     <LineChart data={accuracyTrend}>
                       <CartesianGrid
                         strokeDasharray="3 3"
-                        stroke="oklch(0.25 0.03 280 / 0.4)"
+                        stroke="#363543"
                       />
                       <XAxis
                         dataKey="week"
-                        tick={{ fill: "oklch(0.6 0.02 270)", fontSize: 12 }}
+                        tick={{ fill: "#9799a6", fontSize: 12 }}
                         axisLine={false}
                         tickLine={false}
                       />
                       <YAxis
                         domain={[40, 100]}
-                        tick={{ fill: "oklch(0.6 0.02 270)", fontSize: 12 }}
+                        tick={{ fill: "#9799a6", fontSize: 12 }}
                         axisLine={false}
                         tickLine={false}
                       />
@@ -311,7 +311,7 @@ export default function DashboardPage() {
       {Object.keys(modeStats).length > 0 && (
         <Card className="border-border bg-surface">
           <CardContent className="pt-6">
-            <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="mb-5 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Performance by Mode
             </h3>
             <div className="flex flex-col gap-4">
@@ -326,20 +326,20 @@ export default function DashboardPage() {
                         <div className="flex items-center gap-2">
                           <span className="text-lg">{mode.icon}</span>
                           <span
-                            className={`font-mono text-sm font-bold ${mode.colorClass}`}
+                            className={`font-sans text-sm font-bold ${mode.colorClass}`}
                           >
                             {mode.label}
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs text-muted-foreground">
+                          <span className="font-sans text-xs text-muted-foreground">
                             {ms.completed} sessions
                           </span>
-                          <span className="font-mono text-xs text-muted-foreground">
+                          <span className="font-sans text-xs text-muted-foreground">
                             avg {formatTime(ms.avgTimeSeconds)}
                           </span>
                           <span
-                            className={`font-mono text-sm font-bold ${getAccuracyColor(ms.accuracy)}`}
+                            className={`font-sans text-sm font-bold ${getAccuracyColor(ms.accuracy)}`}
                           >
                             {ms.accuracy}%
                           </span>
@@ -359,7 +359,7 @@ export default function DashboardPage() {
       {recentSessions.length > 0 && (
         <Card className="border-border bg-surface">
           <CardContent className="pt-6">
-            <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="mb-4 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Recent Sessions
             </h3>
             <div className="flex flex-col divide-y divide-border/40">
@@ -378,7 +378,7 @@ export default function DashboardPage() {
                       <span className="text-xl">{modeConfig?.icon}</span>
                       <div className="flex flex-col">
                         <span
-                          className={`font-mono text-sm font-bold ${modeConfig?.colorClass}`}
+                          className={`font-sans text-sm font-bold ${modeConfig?.colorClass}`}
                         >
                           {modeConfig?.label ?? session.mode}
                         </span>
@@ -391,13 +391,13 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <span
-                        className={`font-mono text-lg font-bold ${getAccuracyColor(pct)}`}
+                        className={`font-sans text-lg font-bold ${getAccuracyColor(pct)}`}
                       >
                         {session.score}/{session.total}
                       </span>
                       <Badge
                         variant="outline"
-                        className={`border-border/60 font-mono text-[10px] ${getAccuracyColor(pct)}`}
+                        className={`border-border/60 font-sans text-[10px] ${getAccuracyColor(pct)}`}
                       >
                         {pct}%
                       </Badge>
@@ -415,13 +415,13 @@ export default function DashboardPage() {
         <Card className="border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-4 py-12">
             <span className="text-4xl">&#x1F680;</span>
-            <p className="font-mono text-sm text-muted-foreground text-center">
+            <p className="font-sans text-sm text-muted-foreground text-center">
               No sessions yet! Complete a practice session to see your stats
               here.
             </p>
             <Link
               href="/"
-              className="rounded-lg bg-neon-cyan px-6 py-2 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+              className="rounded-lg bg-neon-cyan px-6 py-2 font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
             >
               Start Practising
             </Link>
@@ -433,7 +433,7 @@ export default function DashboardPage() {
       {totalSessions > 0 && (
         <Card className="border-border bg-surface">
           <CardContent className="pt-6">
-            <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="mb-4 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Test Readiness
             </h3>
             <div className="flex flex-col items-center gap-4 py-4">
@@ -444,7 +444,7 @@ export default function DashboardPage() {
                     cy="60"
                     r="52"
                     fill="none"
-                    stroke="oklch(0.18 0.015 270)"
+                    stroke="#1e1e2a"
                     strokeWidth="8"
                   />
                   <circle
@@ -458,7 +458,7 @@ export default function DashboardPage() {
                     strokeDasharray={`${(overallAccuracy / 100) * 327} 327`}
                   />
                 </svg>
-                <span className="absolute font-mono text-2xl font-bold text-neon-cyan text-glow-cyan">
+                <span className="absolute font-sans text-2xl font-bold text-neon-cyan">
                   {overallAccuracy}%
                 </span>
               </div>
@@ -466,7 +466,7 @@ export default function DashboardPage() {
                 Kent pass threshold is ~78%. Keep practising to build confidence
                 across all areas.
               </p>
-              <div className="flex gap-3 font-mono text-xs">
+              <div className="flex gap-3 font-sans text-xs">
                 <span className="text-neon-green">80%+ Confident</span>
                 <span className="text-neon-amber">60-79% Building</span>
                 <span className="text-neon-pink">&lt;60% Focus area</span>
@@ -506,7 +506,7 @@ const ACTIVITY_GLOW: Record<string, string> = {
   none: "",
   low: "",
   medium: "",
-  goal: "shadow-[0_0_6px_oklch(0.8_0.2_145_/_0.3)]",
+  goal: "shadow-[0_0_6px_rgba(52,211,153,0.3)]",
 };
 
 function StreakCalendar({
@@ -537,10 +537,10 @@ function StreakCalendar({
     <Card className="border-border bg-surface">
       <CardContent className="pt-6">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
             30-Day Streak Calendar
           </h3>
-          <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
+          <div className="flex items-center gap-2 font-sans text-[10px] text-muted-foreground">
             <span className="flex items-center gap-1">
               <span className="inline-block size-2.5 rounded-sm bg-neon-green/40 border border-neon-green/50" />
               Goal met
@@ -561,7 +561,7 @@ function StreakCalendar({
           {DAY_LABELS.map((d) => (
             <div
               key={d}
-              className="text-center font-mono text-[9px] text-muted-foreground/60"
+              className="text-center font-sans text-[9px] text-muted-foreground/60"
             >
               {d}
             </div>
@@ -593,7 +593,7 @@ function StreakCalendar({
               >
                 <span
                   className={[
-                    "font-mono text-[10px] tabular-nums",
+                    "font-sans text-[10px] tabular-nums",
                     level === "goal"
                       ? "font-bold text-neon-green"
                       : level !== "none"
@@ -612,13 +612,13 @@ function StreakCalendar({
         <div className="mt-4 flex items-center justify-center gap-4 border-t border-border/30 pt-3">
           <div className="flex items-center gap-1.5">
             <span className="text-sm" role="img" aria-label="fire">&#x1F525;</span>
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-sans text-xs text-muted-foreground">
               <span className="font-bold text-neon-amber">{streak}</span> day streak
             </span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-sm" role="img" aria-label="check">&#x2705;</span>
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-sans text-xs text-muted-foreground">
               <span className="font-bold text-neon-green">{goalMetDays}</span>/30 goals met
             </span>
           </div>
@@ -645,7 +645,7 @@ function StatCard({
         <span className="text-2xl" role="img" aria-hidden="true">
           {icon}
         </span>
-        <span className={`font-mono text-2xl font-bold ${colorClass}`}>
+        <span className={`font-sans text-2xl font-bold ${colorClass}`}>
           {value}
         </span>
         <span className="text-[10px] uppercase tracking-wider text-muted-foreground">

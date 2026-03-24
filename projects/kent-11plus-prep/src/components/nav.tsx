@@ -52,9 +52,9 @@ export function Nav() {
     <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-border/50 bg-background/80 px-4 py-3 backdrop-blur-md sm:px-6">
       <Link
         href="/"
-        className="font-mono text-lg font-bold tracking-widest text-neon-cyan text-glow-cyan transition-opacity hover:opacity-80"
+        className="text-lg font-bold tracking-tight text-foreground transition-opacity hover:opacity-80"
       >
-        11+ TRAINER
+        11+ <span className="text-primary">Trainer</span>
       </Link>
 
       <div className="flex items-center gap-3">
@@ -63,7 +63,7 @@ export function Nav() {
           <div className="relative" ref={pickerRef}>
             <button
               onClick={() => setPickerOpen((prev) => !prev)}
-              className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
+              className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-3 py-1.5 font-sans text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
             >
               <span className="text-base leading-none">{currentUser.avatar_emoji}</span>
               <span className="font-bold">{currentUser.name}</span>
@@ -82,7 +82,7 @@ export function Nav() {
                       setPickerOpen(false);
                     }}
                     className={[
-                      "flex w-full items-center gap-2 px-3 py-2 font-mono text-xs transition-colors",
+                      "flex w-full items-center gap-2 px-3 py-2 font-sans text-xs transition-colors",
                       "hover:bg-surface-hover",
                       user.id === currentUser.id
                         ? "text-neon-cyan font-bold"
@@ -103,36 +103,36 @@ export function Nav() {
 
         <Link
           href="/baseline"
-          className="rounded-md border border-neon-cyan/30 bg-surface px-3 py-1.5 font-mono text-xs text-neon-cyan/80 transition-colors hover:bg-surface-hover hover:text-neon-cyan"
+          className="rounded-md border border-border/50 bg-surface px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
         >
           Baseline
         </Link>
         <Link
           href="/review"
-          className="rounded-md border border-neon-purple/30 bg-surface px-3 py-1.5 font-mono text-xs text-neon-purple/80 transition-colors hover:bg-surface-hover hover:text-neon-purple"
+          className="rounded-md border border-border/50 bg-surface px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
         >
           Review
         </Link>
         <Link
           href="/mock-test"
-          className="rounded-md border border-neon-pink/30 bg-surface px-3 py-1.5 font-mono text-xs text-neon-pink/80 transition-colors hover:bg-surface-hover hover:text-neon-pink"
+          className="rounded-md border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
         >
           Mock Test
         </Link>
         <Link
           href="/dashboard"
-          className="rounded-md border border-border/50 bg-surface px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
+          className="rounded-md border border-border/50 bg-surface px-3 py-1.5 font-sans text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground"
         >
           Dashboard
         </Link>
         <Link
           href="/parent"
-          className="hidden rounded-md border border-neon-green/30 bg-surface px-3 py-1.5 font-mono text-xs text-neon-green/80 transition-colors hover:bg-surface-hover hover:text-neon-green sm:block"
+          className="hidden rounded-md border border-border/50 bg-surface px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-surface-hover hover:text-foreground sm:block"
         >
           Parent
         </Link>
-        <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-3 py-1.5 font-mono text-xs text-muted-foreground">
-          <span className="text-neon-amber text-glow-amber">&#x1F525;</span>
+        <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-3 py-1.5 font-sans text-xs text-muted-foreground">
+          <span>&#x1F525;</span>
           <span className="tabular-nums">{streak}</span>
           <span className="hidden sm:inline">streak</span>
         </div>

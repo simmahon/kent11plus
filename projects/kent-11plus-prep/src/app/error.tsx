@@ -18,7 +18,7 @@ export default function Error({
       <span className="text-5xl" role="img" aria-hidden="true">
         {"\u26A0\uFE0F"}
       </span>
-      <h2 className="font-mono text-xl font-bold tracking-widest text-neon-amber text-glow-amber">
+      <h2 className="font-sans text-xl font-bold tracking-wide text-neon-amber">
         Something went wrong
       </h2>
       <p className="max-w-md text-sm text-muted-foreground">
@@ -26,7 +26,7 @@ export default function Error({
       </p>
       <button
         onClick={reset}
-        className="rounded-lg bg-neon-cyan px-6 py-2 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+        className="rounded-lg bg-neon-cyan px-6 py-2 font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
       >
         Try Again
       </button>

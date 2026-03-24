@@ -33,13 +33,13 @@ const COMPARE_MODES = PRACTICE_MODES.filter(
   (m) => !["spatial-reasoning", "random-mix"].includes(m.id),
 );
 
-/** oklch colours for chart bars, keyed by mode. */
+/** hex colours for chart bars, keyed by mode. */
 const MODE_BAR_COLORS: Record<string, string> = {
-  "verbal-reasoning": "oklch(0.78 0.18 195)",
-  maths: "oklch(0.75 0.18 145)",
-  english: "oklch(0.78 0.15 75)",
-  "non-verbal-reasoning": "oklch(0.72 0.2 300)",
-  "spatial-reasoning": "oklch(0.72 0.2 300)",
+  "verbal-reasoning": "#6b73f5",
+  maths: "#34d399",
+  english: "#fbbf24",
+  "non-verbal-reasoning": "#8b9bff",
+  "spatial-reasoning": "#8b9bff",
 };
 
 /* ------------------------------------------------------------------ */
@@ -149,7 +149,7 @@ export default function ParentDashboard() {
         <div className="relative size-16">
           <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-neon-cyan" />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Loading parent dashboard...
         </p>
       </div>
@@ -160,7 +160,7 @@ export default function ParentDashboard() {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
         <span className="text-5xl">{"\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC66"}</span>
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           No children found
         </p>
         <p className="text-sm text-muted-foreground">
@@ -192,8 +192,8 @@ export default function ParentDashboard() {
       {/* ---- Header ---- */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-mono text-2xl font-bold tracking-widest text-neon-cyan text-glow-cyan sm:text-3xl">
-            PARENT DASHBOARD
+          <h1 className="font-sans text-2xl font-bold tracking-wide text-neon-cyan sm:text-3xl">
+            Parent Dashboard
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Compare progress and identify focus areas
@@ -201,7 +201,7 @@ export default function ParentDashboard() {
         </div>
         <Button
           variant="outline"
-          className="font-mono text-xs"
+          className="font-sans text-xs"
           onClick={() => router.push("/dashboard")}
         >
           Kid Dashboard
@@ -216,7 +216,7 @@ export default function ParentDashboard() {
             className="flex items-center gap-2 rounded-lg border border-border/50 bg-surface px-4 py-2"
           >
             <span className="text-2xl">{kd.user.avatar_emoji}</span>
-            <span className="font-mono text-sm font-bold text-foreground">
+            <span className="font-sans text-sm font-bold text-foreground">
               {kd.user.name}
             </span>
           </div>
@@ -228,18 +228,18 @@ export default function ParentDashboard() {
       {/* ================================================================ */}
       <Card className="border-border bg-surface">
         <CardContent className="pt-6">
-          <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="mb-5 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Overview
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-border/40">
-                  <th className="pb-2 font-mono text-xs text-muted-foreground" />
+                  <th className="pb-2 font-sans text-xs text-muted-foreground" />
                   {kidsData.map((kd) => (
                     <th
                       key={kd.user.id}
-                      className="pb-2 text-center font-mono text-xs font-bold text-foreground"
+                      className="pb-2 text-center font-sans text-xs font-bold text-foreground"
                     >
                       {kd.user.avatar_emoji} {kd.user.name}
                     </th>
@@ -273,7 +273,7 @@ export default function ParentDashboard() {
       {/* ================================================================ */}
       <Card className="border-border bg-surface">
         <CardContent className="pt-6">
-          <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="mb-5 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Subject Levels (Baseline {"\u2192"} Current)
           </h3>
           <div className="flex flex-col gap-6">
@@ -282,7 +282,7 @@ export default function ParentDashboard() {
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{mode.icon}</span>
                   <span
-                    className={`font-mono text-sm font-bold ${mode.colorClass}`}
+                    className={`font-sans text-sm font-bold ${mode.colorClass}`}
                   >
                     {mode.label}
                   </span>
@@ -305,7 +305,7 @@ export default function ParentDashboard() {
                       key={kd.user.id}
                       className="flex items-center gap-3 pl-8"
                     >
-                      <span className="w-16 shrink-0 font-mono text-xs text-muted-foreground">
+                      <span className="w-16 shrink-0 font-sans text-xs text-muted-foreground">
                         {kd.user.name}
                       </span>
 
@@ -319,7 +319,7 @@ export default function ParentDashboard() {
                           {baselineAccuracy !== null && (
                             <Badge
                               variant="outline"
-                              className="border-border/60 font-mono text-[10px] text-muted-foreground"
+                              className="border-border/60 font-sans text-[10px] text-muted-foreground"
                             >
                               Baseline {baselineAccuracy}%
                             </Badge>
@@ -337,7 +337,7 @@ export default function ParentDashboard() {
                           {currentAccuracy !== null && (
                             <Badge
                               variant="outline"
-                              className={`font-mono text-[10px] ${
+                              className={`font-sans text-[10px] ${
                                 currentAccuracy >= 80
                                   ? "border-neon-green/40 text-neon-green"
                                   : currentAccuracy >= 60
@@ -353,7 +353,7 @@ export default function ParentDashboard() {
                           {baselineAccuracy !== null &&
                             currentAccuracy !== null && (
                               <span
-                                className={`font-mono text-[10px] font-bold ${
+                                className={`font-sans text-[10px] font-bold ${
                                   currentAccuracy > baselineAccuracy
                                     ? "text-neon-green"
                                     : currentAccuracy < baselineAccuracy
@@ -371,7 +371,7 @@ export default function ParentDashboard() {
 
                           {/* Skill level */}
                           <span
-                            className={`ml-auto font-mono text-xs font-bold ${skillColor(currentSkill)}`}
+                            className={`ml-auto font-sans text-xs font-bold ${skillColor(currentSkill)}`}
                           >
                             Lvl {currentSkill.toFixed(1)}
                           </span>
@@ -392,7 +392,7 @@ export default function ParentDashboard() {
       {Object.keys(allTopicsByMode).length > 0 && (
         <Card className="border-border bg-surface">
           <CardContent className="pt-6">
-            <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="mb-5 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Topic Heatmap
             </h3>
             <div className="flex flex-col gap-6">
@@ -403,7 +403,7 @@ export default function ParentDashboard() {
                 return (
                   <div key={mode.id} className="flex flex-col gap-2">
                     <span
-                      className={`font-mono text-xs font-bold ${mode.colorClass}`}
+                      className={`font-sans text-xs font-bold ${mode.colorClass}`}
                     >
                       {mode.icon} {mode.label}
                     </span>
@@ -411,13 +411,13 @@ export default function ParentDashboard() {
                       <table className="w-full text-left">
                         <thead>
                           <tr className="border-b border-border/30">
-                            <th className="pb-1.5 pr-4 font-mono text-[10px] text-muted-foreground">
+                            <th className="pb-1.5 pr-4 font-sans text-[10px] text-muted-foreground">
                               Topic
                             </th>
                             {kidsData.map((kd) => (
                               <th
                                 key={kd.user.id}
-                                className="pb-1.5 text-center font-mono text-[10px] text-muted-foreground"
+                                className="pb-1.5 text-center font-sans text-[10px] text-muted-foreground"
                               >
                                 {kd.user.name}
                               </th>
@@ -447,7 +447,7 @@ export default function ParentDashboard() {
                                   >
                                     {level !== null ? (
                                       <span
-                                        className={`inline-block rounded px-2 py-0.5 font-mono text-[10px] font-bold ${skillColor(level)} ${skillBg(level)}`}
+                                        className={`inline-block rounded px-2 py-0.5 font-sans text-[10px] font-bold ${skillColor(level)} ${skillBg(level)}`}
                                       >
                                         {level.toFixed(1)}
                                       </span>
@@ -474,13 +474,13 @@ export default function ParentDashboard() {
               <span className="text-[10px] text-muted-foreground">
                 Key:
               </span>
-              <span className="rounded bg-neon-green/15 px-2 py-0.5 font-mono text-[10px] font-bold text-neon-green">
+              <span className="rounded bg-neon-green/15 px-2 py-0.5 font-sans text-[10px] font-bold text-neon-green">
                 4.0+ Strong
               </span>
-              <span className="rounded bg-neon-amber/15 px-2 py-0.5 font-mono text-[10px] font-bold text-neon-amber">
+              <span className="rounded bg-neon-amber/15 px-2 py-0.5 font-sans text-[10px] font-bold text-neon-amber">
                 3.0-3.9 Building
               </span>
-              <span className="rounded bg-neon-pink/15 px-2 py-0.5 font-mono text-[10px] font-bold text-neon-pink">
+              <span className="rounded bg-neon-pink/15 px-2 py-0.5 font-sans text-[10px] font-bold text-neon-pink">
                 &lt;3.0 Focus
               </span>
             </div>
@@ -494,7 +494,7 @@ export default function ParentDashboard() {
       {kidsData.some((kd) => kd.mockTests.length > 0) && (
         <Card className="border-border bg-surface">
           <CardContent className="pt-6">
-            <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h3 className="mb-5 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Mock Test History
             </h3>
             <div className="flex flex-col gap-4">
@@ -502,7 +502,7 @@ export default function ParentDashboard() {
                 if (kd.mockTests.length === 0) return null;
                 return (
                   <div key={kd.user.id} className="flex flex-col gap-2">
-                    <span className="font-mono text-xs font-bold text-foreground">
+                    <span className="font-sans text-xs font-bold text-foreground">
                       {kd.user.avatar_emoji} {kd.user.name}
                     </span>
                     <div className="flex flex-col gap-1.5 pl-6">
@@ -530,12 +530,12 @@ export default function ParentDashboard() {
                               {date}
                             </span>
                             <div className="flex items-center gap-2">
-                              <span className="font-mono text-xs text-muted-foreground">
+                              <span className="font-sans text-xs text-muted-foreground">
                                 {mt.score}/{mt.total} ({pct}%)
                               </span>
                               <Badge
                                 variant="outline"
-                                className={`font-mono text-[10px] ${
+                                className={`font-sans text-[10px] ${
                                   passed
                                     ? "border-neon-green/40 text-neon-green"
                                     : "border-neon-amber/40 text-neon-amber"
@@ -561,7 +561,7 @@ export default function ParentDashboard() {
       {/* ================================================================ */}
       <Card className="border-neon-cyan/20 bg-neon-cyan/5">
         <CardContent className="pt-6">
-          <h3 className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="mb-3 font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Focus Recommendations
           </h3>
           <div className="flex flex-col gap-3">
@@ -586,7 +586,7 @@ export default function ParentDashboard() {
                 <div key={kd.user.id} className="flex items-start gap-2">
                   <span className="text-lg">{kd.user.avatar_emoji}</span>
                   <div>
-                    <span className="font-mono text-sm font-bold text-foreground">
+                    <span className="font-sans text-sm font-bold text-foreground">
                       {kd.user.name}:
                     </span>{" "}
                     {hasData ? (
@@ -639,13 +639,13 @@ function OverviewRow({
 }) {
   return (
     <tr>
-      <td className="py-2 font-mono text-xs text-muted-foreground">
+      <td className="py-2 font-sans text-xs text-muted-foreground">
         {label}
       </td>
       {kidsData.map((kd) => (
         <td
           key={kd.user.id}
-          className={`py-2 text-center font-mono text-sm font-bold ${
+          className={`py-2 text-center font-sans text-sm font-bold ${
             getColor ? getColor(kd) : "text-foreground"
           }`}
         >

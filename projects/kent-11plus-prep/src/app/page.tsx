@@ -115,7 +115,7 @@ function DailyGoalRing({
             cy="50"
             r="42"
             fill="none"
-            stroke="oklch(0.18 0.015 270)"
+            stroke="#363543"
             strokeWidth="6"
           />
           {/* Progress arc */}
@@ -135,16 +135,16 @@ function DailyGoalRing({
           />
         </svg>
         <div className="absolute flex flex-col items-center">
-          <span className={`font-mono text-xl font-bold tabular-nums ${glowClass}`}>
+          <span className={`font-sans text-xl font-bold tabular-nums ${glowClass}`}>
             {current}
           </span>
-          <span className="font-mono text-[10px] text-muted-foreground">
+          <span className="font-sans text-[10px] text-muted-foreground">
             / {goal}
           </span>
         </div>
       </div>
       <div className="flex flex-col items-center gap-0.5">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
+        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
           {label}
         </span>
         <span className="text-[10px] text-muted-foreground/60">
@@ -191,20 +191,20 @@ export default function Home() {
     <div className="flex flex-col items-center gap-10 py-4">
       {/* ---- Header ---- */}
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="font-mono text-4xl font-bold tracking-widest text-neon-cyan text-glow-cyan sm:text-5xl">
-          SELECT MODE
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          Choose a <span className="text-primary">subject</span>
         </h1>
         <p className="text-sm text-muted-foreground">
-          Choose your training program
+          Pick a practice mode to start training
         </p>
       </div>
 
       {/* ---- Daily Goal Progress ---- */}
       {currentUser && dailyProgress && (
-        <Card className="w-full border-border/50 bg-gradient-to-br from-neon-cyan/[0.03] via-transparent to-neon-green/[0.03]">
+        <Card className="w-full border-border/50 bg-gradient-to-br from-primary/[0.04] via-transparent to-neon-green/[0.03]">
           <CardContent className="flex flex-col items-center gap-4 px-4 py-5 sm:px-6">
             {/* Section heading */}
-            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <h2 className="font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Today&apos;s Goals
             </h2>
 
@@ -215,8 +215,8 @@ export default function Home() {
                 goal={goalQuestions}
                 label="Questions"
                 unit="completed"
-                strokeColor="oklch(0.78 0.18 195)"
-                glowClass="text-neon-cyan text-glow-cyan"
+                strokeColor="#6b73f5"
+                glowClass="text-primary"
               />
 
               {/* Streak in the center */}
@@ -224,10 +224,10 @@ export default function Home() {
                 <span className="text-3xl" role="img" aria-label="fire">
                   &#x1F525;
                 </span>
-                <span className="font-mono text-2xl font-bold tabular-nums text-neon-amber text-glow-amber">
+                <span className="font-sans text-2xl font-bold tabular-nums text-neon-amber">
                   {streak}
                 </span>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
                   Day Streak
                 </span>
               </div>
@@ -237,14 +237,14 @@ export default function Home() {
                 goal={goalMinutes}
                 label="Minutes"
                 unit="practised"
-                strokeColor="oklch(0.8 0.2 145)"
-                glowClass="text-neon-green text-glow-green"
+                strokeColor="#34d399"
+                glowClass="text-neon-green"
               />
             </div>
 
             {/* Encouraging text */}
             <p
-              className={`font-mono text-sm font-bold ${getEncouragingColor(
+              className={`font-sans text-sm font-bold ${getEncouragingColor(
                 goalQuestions > 0 ? (dailyProgress.questionsToday / goalQuestions) * 100 : 0,
                 goalMinutes > 0 ? (dailyProgress.minutesToday / goalMinutes) * 100 : 0,
               )}`}
@@ -260,10 +260,10 @@ export default function Home() {
 
       {/* ---- Baseline CTA ---- */}
       {baselineDone === false && (
-        <Card className="w-full border-neon-cyan/30 bg-gradient-to-r from-neon-cyan/5 via-neon-purple/5 to-neon-pink/5">
+        <Card className="w-full border-primary/30 bg-gradient-to-r from-primary/5 via-primary/[0.03] to-transparent">
           <CardContent className="flex flex-col items-center gap-3 px-6 py-5 sm:flex-row sm:justify-between">
             <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">
-              <span className="font-mono text-sm font-bold text-neon-cyan text-glow-cyan">
+              <span className="text-sm font-bold text-primary">
                 {"\uD83C\uDFAF"} Take your Baseline Test
               </span>
               <span className="text-xs text-muted-foreground">
@@ -272,7 +272,7 @@ export default function Home() {
               </span>
             </div>
             <Button
-              className="shrink-0 bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+              className="shrink-0 bg-primary text-xs font-semibold text-primary-foreground hover:bg-primary/90"
               onClick={() => router.push("/baseline")}
             >
               Start Baseline
@@ -298,7 +298,7 @@ export default function Home() {
                   "hover:bg-surface-hover hover:border-border/80",
                   GLOW_HOVER_CLASS[mode.glowClass] ?? "",
                   isRandom
-                    ? "border-2 border-transparent bg-gradient-to-br from-neon-cyan/10 via-neon-purple/10 to-neon-pink/10 ring-1 ring-neon-purple/30"
+                    ? "border-2 border-transparent bg-gradient-to-br from-primary/10 via-primary/5 to-neon-pink/5 ring-1 ring-primary/30"
                     : "",
                 ].join(" ")}
                 style={
@@ -315,7 +315,7 @@ export default function Home() {
                     className="pointer-events-none absolute -inset-px rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-100"
                     style={{
                       background:
-                        "linear-gradient(135deg, oklch(0.78 0.18 195), oklch(0.72 0.2 300), oklch(0.75 0.2 340))",
+                        "linear-gradient(135deg, #6b73f5, #8b9bff, #f472b6)",
                       mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                       maskComposite: "exclude",
                       padding: "1.5px",
@@ -337,7 +337,7 @@ export default function Home() {
                   {/* Label */}
                   <span
                     className={[
-                      "font-mono text-sm font-bold tracking-wide",
+                      "font-sans text-sm font-bold tracking-wide",
                       mode.colorClass,
                     ].join(" ")}
                   >
@@ -353,13 +353,13 @@ export default function Home() {
                   <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
                     <Badge
                       variant="outline"
-                      className="border-border/60 font-mono text-[10px] text-muted-foreground"
+                      className="border-border/60 font-sans text-[10px] text-muted-foreground"
                     >
                       {mode.questionCount} Qs
                     </Badge>
                     <Badge
                       variant="outline"
-                      className="border-border/60 font-mono text-[10px] text-muted-foreground"
+                      className="border-border/60 font-sans text-[10px] text-muted-foreground"
                     >
                       {Math.floor(mode.timeLimitSeconds / 60)} min
                     </Badge>
@@ -374,7 +374,7 @@ export default function Home() {
       {/* ---- Tricky Topics section ---- */}
       <div className="flex w-full flex-col gap-4 border-t border-border/40 pt-8">
         <div className="flex flex-col items-center gap-1 text-center">
-          <h2 className="font-mono text-sm font-bold uppercase tracking-[0.2em] text-neon-amber text-glow-amber">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
             Tricky Topics
           </h2>
           <p className="text-xs text-muted-foreground">
@@ -389,13 +389,13 @@ export default function Home() {
               onClick={() => router.push(topic.href)}
               className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg"
             >
-              <Card className="h-full cursor-pointer border-neon-amber/20 bg-surface transition-all duration-300 hover:bg-surface-hover hover:border-neon-amber/40">
+              <Card className="h-full cursor-pointer border-border/40 bg-surface transition-all duration-300 hover:bg-surface-hover hover:border-border/60">
                 <CardContent className="flex flex-col gap-2 px-3 py-3">
                   <div className="flex items-center gap-2">
                     <span className="text-xl" role="img" aria-hidden="true">
                       {topic.icon}
                     </span>
-                    <span className="font-mono text-xs font-bold text-neon-amber">
+                    <span className="text-xs font-bold text-foreground">
                       {topic.label}
                     </span>
                   </div>
@@ -404,7 +404,7 @@ export default function Home() {
                   </span>
                   <Badge
                     variant="outline"
-                    className="w-fit border-neon-amber/30 font-mono text-[9px] text-neon-amber/80"
+                    className="w-fit border-primary/30 text-[9px] text-primary/80"
                   >
                     {topic.tag}
                   </Badge>
@@ -417,7 +417,7 @@ export default function Home() {
 
       {/* ---- Stats section ---- */}
       <div className="flex w-full flex-col items-center gap-3 border-t border-border/40 pt-8">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">
           Stats
         </h2>
 
@@ -428,7 +428,7 @@ export default function Home() {
               &#x1F525;
             </span>
             <div className="flex flex-col">
-              <span className="font-mono text-lg font-bold tabular-nums text-neon-amber text-glow-amber">
+              <span className="font-sans text-lg font-bold tabular-nums text-neon-amber">
                 {streak}
               </span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -443,7 +443,7 @@ export default function Home() {
               &#x2705;
             </span>
             <div className="flex flex-col">
-              <span className="font-mono text-lg font-bold tabular-nums text-neon-green text-glow-green">
+              <span className="font-sans text-lg font-bold tabular-nums text-neon-green">
                 {totalAnswered}
               </span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">

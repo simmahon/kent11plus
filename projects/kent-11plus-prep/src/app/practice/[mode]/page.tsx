@@ -539,7 +539,7 @@ export default function PracticePage() {
   if (!modeConfig) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Mode not found
         </p>
         <Button variant="outline" onClick={() => router.push("/")}>
@@ -557,7 +557,7 @@ export default function PracticePage() {
           <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-neon-cyan" />
           <div className="absolute inset-2 animate-spin rounded-full border-2 border-transparent border-t-neon-purple" style={{ animationDirection: "reverse", animationDuration: "0.8s" }} />
         </div>
-        <p className="font-mono text-sm text-muted-foreground animate-pulse">
+        <p className="font-sans text-sm text-muted-foreground animate-pulse">
           Generating {modeConfig.label} questions...
         </p>
       </div>
@@ -568,13 +568,13 @@ export default function PracticePage() {
   if (error) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Something went wrong
         </p>
         <p className="text-sm text-muted-foreground">{error}</p>
         <div className="flex gap-3">
           <Button
-            className="bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+            className="bg-neon-cyan font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
             onClick={handleRetry}
           >
             Try Again
@@ -608,14 +608,14 @@ export default function PracticePage() {
 
     return (
       <div className="flex flex-col items-center gap-8 py-8">
-        <h2 className="font-mono text-3xl font-bold tracking-widest text-neon-cyan text-glow-cyan">
-          {testPracticeMode ? "TEST PRACTICE RESULTS" : "SESSION COMPLETE"}
+        <h2 className="font-sans text-3xl font-bold tracking-wide text-neon-cyan">
+          {testPracticeMode ? "Test Practice Results" : "Session Complete"}
         </h2>
 
         <Card className="w-full max-w-md border-border bg-surface">
           <CardContent className="flex flex-col items-center gap-6 px-6 py-8">
             <div className="flex flex-col items-center gap-1">
-              <span className="font-mono text-6xl font-bold tabular-nums text-neon-green text-glow-green">
+              <span className="font-sans text-6xl font-bold tabular-nums text-neon-green">
                 {correctCount}/{totalQuestions}
               </span>
               <span className="text-sm text-muted-foreground">
@@ -628,19 +628,19 @@ export default function PracticePage() {
             <div className="flex items-center gap-3">
               <Badge
                 variant="outline"
-                className="border-border/60 font-mono text-xs text-muted-foreground"
+                className="border-border/60 font-sans text-xs text-muted-foreground"
               >
                 {mins}m {secs.toString().padStart(2, "0")}s
               </Badge>
               <Badge
                 variant="outline"
-                className={testPracticeMode ? "border-neon-pink/40 font-mono text-xs text-neon-pink" : "border-neon-cyan/40 font-mono text-xs text-neon-cyan"}
+                className={testPracticeMode ? "border-neon-pink/40 font-sans text-xs text-neon-pink" : "border-neon-cyan/40 font-sans text-xs text-neon-cyan"}
               >
                 {testPracticeMode ? "Test Mode" : `Level ${skillLevel.toFixed(1)}`}
               </Badge>
             </div>
 
-            <p className="text-center font-mono text-sm text-neon-amber text-glow-amber">
+            <p className="text-center font-sans text-sm text-neon-amber">
               {encouragement}
             </p>
 
@@ -652,14 +652,14 @@ export default function PracticePage() {
 
             <div className="flex w-full flex-col gap-3 pt-2">
               <Button
-                className="w-full bg-neon-cyan font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+                className="w-full bg-neon-cyan font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
                 onClick={handleRetry}
               >
                 Try Again
               </Button>
               <Button
                 variant="outline"
-                className="w-full font-mono text-xs uppercase tracking-wider"
+                className="w-full font-sans text-xs uppercase tracking-wider"
                 onClick={() => router.push("/")}
               >
                 Back to Modes
@@ -686,21 +686,21 @@ export default function PracticePage() {
             {modeConfig.icon}
           </span>
           <span
-            className={`font-mono text-sm font-bold tracking-wide ${modeConfig.colorClass}`}
+            className={`font-sans text-sm font-bold tracking-wide ${modeConfig.colorClass}`}
           >
             {modeConfig.label}
           </span>
           {testPracticeMode ? (
             <Badge
               variant="outline"
-              className="border-neon-pink/40 font-mono text-[10px] text-neon-pink"
+              className="border-neon-pink/40 font-sans text-[10px] text-neon-pink"
             >
               TEST MODE
             </Badge>
           ) : (
             <Badge
               variant="outline"
-              className="border-neon-cyan/30 font-mono text-[10px] text-neon-cyan"
+              className="border-neon-cyan/30 font-sans text-[10px] text-neon-cyan"
             >
               Lvl {skillLevel.toFixed(1)}
             </Badge>
@@ -709,7 +709,7 @@ export default function PracticePage() {
 
         <Badge
           variant="outline"
-          className="border-border/60 font-mono text-xs text-muted-foreground"
+          className="border-border/60 font-sans text-xs text-muted-foreground"
         >
           Q {currentQuestionIndex + 1}/{totalQuestions}
         </Badge>
@@ -717,9 +717,9 @@ export default function PracticePage() {
         <div className="flex items-center gap-2">
           <span
             className={[
-              "font-mono text-sm font-bold tabular-nums",
+              "font-sans text-sm font-bold tabular-nums",
               timerUrgent
-                ? "animate-pulse text-neon-amber text-glow-amber"
+                ? "animate-pulse text-neon-amber"
                 : "text-muted-foreground",
             ].join(" ")}
           >
@@ -762,7 +762,7 @@ export default function PracticePage() {
           <button
             onClick={() => setTestPracticeMode((prev) => !prev)}
             className={[
-              "rounded-full px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider transition-all",
+              "rounded-full px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-wider transition-all",
               testPracticeMode
                 ? "bg-neon-pink/20 text-neon-pink border border-neon-pink/40"
                 : "bg-muted/30 text-muted-foreground border border-border/40 hover:text-foreground",
@@ -821,10 +821,10 @@ export default function PracticePage() {
                               : "\u{1F4DA}"}
                     </span>
                     <div>
-                      <h3 className="font-mono text-sm font-bold tracking-wide text-neon-cyan">
+                      <h3 className="font-sans text-sm font-bold tracking-wide text-neon-cyan">
                         {passageMeta?.title ?? "Reading Passage"}
                       </h3>
-                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      <p className="font-sans text-[10px] uppercase tracking-wide text-muted-foreground">
                         Read carefully, then answer the question below
                       </p>
                     </div>
@@ -833,7 +833,7 @@ export default function PracticePage() {
                     {passageMeta?.genre && (
                       <Badge
                         variant="outline"
-                        className="border-neon-purple/30 font-mono text-[10px] capitalize text-neon-purple"
+                        className="border-neon-purple/30 font-sans text-[10px] capitalize text-neon-purple"
                       >
                         {passageMeta.genre}
                       </Badge>
@@ -848,7 +848,7 @@ export default function PracticePage() {
                 </div>
                 {/* Source attribution */}
                 {passageMeta?.source && (
-                  <p className="mt-3 text-right font-mono text-[10px] text-muted-foreground/60 italic">
+                  <p className="mt-3 text-right font-sans text-[10px] text-muted-foreground/60 italic">
                     Source: {passageMeta.source}
                   </p>
                 )}
@@ -903,7 +903,7 @@ export default function PracticePage() {
                   >
                     <span
                       className={[
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-sans text-xs font-bold",
                         hasAnswered && isSelected && isCorrectOption
                           ? "border-neon-green/60 text-neon-green"
                           : hasAnswered && isSelected && !isCorrectOption
@@ -919,7 +919,7 @@ export default function PracticePage() {
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 z-10 shrink-0 rounded-md bg-neon-cyan px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90 transition-colors cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 z-10 shrink-0 rounded-md bg-neon-cyan px-3 py-1.5 font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90 transition-colors cursor-pointer"
                     >
                       {currentQuestionIndex < totalQuestions - 1
                         ? "Next →"
@@ -946,10 +946,10 @@ export default function PracticePage() {
           <CardContent className="flex flex-col gap-3 px-6 py-5">
             <span
               className={[
-                "font-mono text-sm font-bold uppercase tracking-wider",
+                "font-sans text-sm font-bold uppercase tracking-wider",
                 isCorrect
-                  ? "text-neon-green text-glow-green"
-                  : "text-neon-amber text-glow-amber",
+                  ? "text-neon-green"
+                  : "text-neon-amber",
               ].join(" ")}
             >
               {isCorrect ? "Correct!" : "Not quite!"}
@@ -983,7 +983,7 @@ export default function PracticePage() {
                 </p>
                 {strategyTip && (
                   <div className="mt-1 rounded-md border border-neon-cyan/30 bg-neon-cyan/5 px-3 py-2">
-                    <p className="font-mono text-xs font-bold text-neon-cyan mb-1">
+                    <p className="font-sans text-xs font-bold text-neon-cyan mb-1">
                       Strategy Tip
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -1011,7 +1011,7 @@ export default function PracticePage() {
             <div className="flex justify-end pt-2">
               <Button
                 onClick={handleNext}
-                className="bg-neon-cyan font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
+                className="bg-neon-cyan font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90"
               >
                 {currentQuestionIndex < totalQuestions - 1
                   ? "Next Question"

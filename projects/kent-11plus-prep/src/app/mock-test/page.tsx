@@ -712,7 +712,7 @@ export default function MockTestPage() {
   if (!currentUser) {
     return (
       <div className="flex flex-col items-center gap-6 py-16 text-center">
-        <p className="font-mono text-lg text-neon-amber text-glow-amber">
+        <p className="font-sans text-lg text-neon-amber">
           Select a user first
         </p>
         <Button variant="outline" onClick={() => router.push("/")}>
@@ -730,7 +730,7 @@ export default function MockTestPage() {
       <div className="flex flex-col items-center gap-8 py-8">
         <div className="flex flex-col items-center gap-2 text-center">
           <span className="text-5xl">{"\uD83D\uDCCB"}</span>
-          <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-pink text-glow-pink sm:text-4xl">
+          <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-pink sm:text-4xl">
             MOCK TEST
           </h1>
           <p className="max-w-md text-sm text-muted-foreground">
@@ -743,22 +743,22 @@ export default function MockTestPage() {
           <CardContent className="flex flex-col gap-4 px-6 py-6">
             {/* Paper 1 */}
             <div className="flex flex-col gap-2">
-              <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Paper 1
               </p>
               <div className="flex items-center justify-between pl-2">
-                <span className="font-mono text-xs font-bold text-neon-amber">
+                <span className="font-sans text-xs font-bold text-neon-amber">
                   English
                 </span>
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-sans text-xs text-muted-foreground">
                   12 Qs &middot; 25 min
                 </span>
               </div>
               <div className="flex items-center justify-between pl-2">
-                <span className="font-mono text-xs font-bold text-neon-green">
+                <span className="font-sans text-xs font-bold text-neon-green">
                   Mathematics
                 </span>
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-sans text-xs text-muted-foreground">
                   12 Qs &middot; 25 min
                 </span>
               </div>
@@ -768,22 +768,22 @@ export default function MockTestPage() {
 
             {/* Paper 2 */}
             <div className="flex flex-col gap-2">
-              <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Paper 2
               </p>
               <div className="flex items-center justify-between pl-2">
-                <span className="font-mono text-xs font-bold text-neon-cyan">
+                <span className="font-sans text-xs font-bold text-neon-cyan">
                   Verbal Reasoning
                 </span>
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-sans text-xs text-muted-foreground">
                   10 Qs &middot; 20 min
                 </span>
               </div>
               <div className="flex items-center justify-between pl-2">
-                <span className="font-mono text-xs font-bold text-neon-purple">
+                <span className="font-sans text-xs font-bold text-neon-purple">
                   Non-Verbal / Spatial
                 </span>
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-sans text-xs text-muted-foreground">
                   8 Qs &middot; 15 min
                 </span>
               </div>
@@ -794,7 +794,7 @@ export default function MockTestPage() {
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\u23F1\uFE0F"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-neon-amber">
+                <p className="font-sans text-sm font-bold text-neon-amber">
                   {totalQuestions} questions &middot; ~85 minutes
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -806,7 +806,7 @@ export default function MockTestPage() {
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\uD83D\uDEAB"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-foreground">
+                <p className="font-sans text-sm font-bold text-foreground">
                   No going back
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -818,7 +818,7 @@ export default function MockTestPage() {
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\uD83D\uDCCA"}</span>
               <div>
-                <p className="font-mono text-sm font-bold text-foreground">
+                <p className="font-sans text-sm font-bold text-foreground">
                   Kent scoring
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -836,14 +836,14 @@ export default function MockTestPage() {
 
         <div className="flex w-full max-w-md flex-col gap-3">
           <Button
-            className="w-full bg-neon-pink font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
+            className="w-full bg-neon-pink font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
             onClick={loadAllQuestions}
           >
             Begin Mock Test
           </Button>
           <Button
             variant="outline"
-            className="w-full font-mono text-xs uppercase tracking-wider"
+            className="w-full font-sans text-xs uppercase tracking-wider"
             onClick={() => router.push("/")}
           >
             Back to Home
@@ -871,12 +871,12 @@ export default function MockTestPage() {
             }}
           />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Generating {totalQuestions} questions...
         </p>
         <div className="w-full max-w-xs">
           <Progress value={pct} className="h-1.5" />
-          <p className="mt-2 text-center font-mono text-xs text-muted-foreground">
+          <p className="mt-2 text-center font-sans text-xs text-muted-foreground">
             {loadProgress}/{totalQuestions}
           </p>
         </div>
@@ -921,7 +921,7 @@ export default function MockTestPage() {
           <span className="text-5xl">
             {phase === "paper-break" ? "\u2705" : "\u2615"}
           </span>
-          <h2 className="font-mono text-2xl font-bold tracking-widest text-neon-cyan text-glow-cyan">
+          <h2 className="font-sans text-2xl font-bold tracking-wide text-neon-cyan">
             {bc.title}
           </h2>
           <p className="text-sm text-muted-foreground">
@@ -930,7 +930,7 @@ export default function MockTestPage() {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <span className="font-mono text-4xl font-bold tabular-nums text-neon-pink text-glow-pink">
+          <span className="font-sans text-4xl font-bold tabular-nums text-neon-pink">
             {breakSecondsLeft}
           </span>
           <p className="text-xs text-muted-foreground">
@@ -939,7 +939,7 @@ export default function MockTestPage() {
         </div>
 
         <Button
-          className="bg-neon-pink font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
+          className="bg-neon-pink font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
           onClick={() => startSection(bc.nextPhase)}
         >
           Start Now
@@ -964,7 +964,7 @@ export default function MockTestPage() {
             }}
           />
         </div>
-        <p className="animate-pulse font-mono text-sm text-muted-foreground">
+        <p className="animate-pulse font-sans text-sm text-muted-foreground">
           Calculating your Kent scores...
         </p>
       </div>
@@ -1044,7 +1044,7 @@ export default function MockTestPage() {
       <div className="flex flex-col items-center gap-8 py-8">
         <div className="flex flex-col items-center gap-2 text-center">
           <span className="text-5xl">{"\uD83D\uDCCB"}</span>
-          <h1 className="font-mono text-3xl font-bold tracking-widest text-neon-pink text-glow-pink">
+          <h1 className="font-sans text-3xl font-bold tracking-wide text-neon-pink">
             MOCK TEST COMPLETE
           </h1>
         </div>
@@ -1059,26 +1059,26 @@ export default function MockTestPage() {
           ].join(" ")}
         >
           <CardContent className="flex flex-col items-center gap-4 px-6 py-6">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Kent Total Score
             </p>
             <span
               className={[
-                "font-mono text-6xl font-bold tabular-nums",
+                "font-sans text-6xl font-bold tabular-nums",
                 passed
-                  ? "text-neon-green text-glow-green"
-                  : "text-neon-amber text-glow-amber",
+                  ? "text-neon-green"
+                  : "text-neon-amber",
               ].join(" ")}
             >
               {totalScore}
             </span>
-            <span className="font-mono text-sm text-muted-foreground">
+            <span className="font-sans text-sm text-muted-foreground">
               out of 423 (pass: {"\u2265"} 332, no score below 106)
             </span>
             <Badge
               variant="outline"
               className={[
-                "px-4 py-1 font-mono text-sm font-bold",
+                "px-4 py-1 font-sans text-sm font-bold",
                 passed
                   ? "border-neon-green/60 text-neon-green"
                   : "border-neon-amber/60 text-neon-amber",
@@ -1092,25 +1092,25 @@ export default function MockTestPage() {
         {/* 3 component scores */}
         <Card className="w-full max-w-md border-border bg-surface">
           <CardContent className="flex flex-col gap-4 px-6 py-6">
-            <p className="text-center font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-center font-sans text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Component Scores
             </p>
             {scoreRows.map((row) => (
               <div key={row.label} className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
                   <span
-                    className={`font-mono text-xs font-bold ${row.colorClass}`}
+                    className={`font-sans text-xs font-bold ${row.colorClass}`}
                   >
                     {row.label}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="font-sans text-xs text-muted-foreground">
                       {row.correct}/{row.total} raw
                     </span>
                     <Badge
                       variant="outline"
                       className={[
-                        "font-mono text-xs font-bold",
+                        "font-sans text-xs font-bold",
                         row.score >= 106
                           ? "border-neon-green/40 text-neon-green"
                           : "border-neon-amber/40 text-neon-amber",
@@ -1126,12 +1126,12 @@ export default function MockTestPage() {
                     style={{
                       width: `${((row.score - 69) / (141 - 69)) * 100}%`,
                       background: row.colorClass.includes("cyan")
-                        ? "oklch(0.78 0.18 195)"
+                        ? "#6b73f5"
                         : row.colorClass.includes("green")
-                          ? "oklch(0.75 0.18 145)"
+                          ? "#34d399"
                           : row.colorClass.includes("amber")
-                            ? "oklch(0.78 0.15 75)"
-                            : "oklch(0.75 0.18 310)",
+                            ? "#fbbf24"
+                            : "#8b9bff",
                     }}
                   />
                 </div>
@@ -1144,13 +1144,13 @@ export default function MockTestPage() {
         <div className="flex items-center gap-4">
           <Badge
             variant="outline"
-            className="font-mono text-xs text-muted-foreground"
+            className="font-sans text-xs text-muted-foreground"
           >
             {totalCorrect}/{totalQs} correct ({rawPct}%)
           </Badge>
           <Badge
             variant="outline"
-            className="font-mono text-xs text-muted-foreground"
+            className="font-sans text-xs text-muted-foreground"
           >
             {mins}m {secs.toString().padStart(2, "0")}s
           </Badge>
@@ -1159,7 +1159,7 @@ export default function MockTestPage() {
         {/* Encouragement */}
         <Card className="w-full max-w-md border-neon-pink/20 bg-neon-pink/5">
           <CardContent className="px-6 py-4">
-            <p className="font-mono text-sm text-foreground">
+            <p className="font-sans text-sm text-foreground">
               {passed
                 ? "Great result! You're on track to pass the Kent Test."
                 : totalScore >= 300
@@ -1167,7 +1167,7 @@ export default function MockTestPage() {
                   : "Keep going! Regular practice will build your score. Focus on one subject at a time."}
             </p>
             {!passed && minScore < 106 && (
-              <p className="mt-2 font-mono text-xs text-neon-amber">
+              <p className="mt-2 font-sans text-xs text-neon-amber">
                 Note: Even if your total reaches 332, each component score must
                 be at least 106 to pass.
               </p>
@@ -1177,7 +1177,7 @@ export default function MockTestPage() {
 
         <div className="flex w-full max-w-md flex-col gap-3">
           <Button
-            className="w-full bg-neon-pink font-mono text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
+            className="w-full bg-neon-pink font-sans text-sm font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
             onClick={() => {
               savedRef.current = false;
               setPhase("intro");
@@ -1196,7 +1196,7 @@ export default function MockTestPage() {
           </Button>
           <Button
             variant="outline"
-            className="w-full font-mono text-xs uppercase tracking-wider"
+            className="w-full font-sans text-xs uppercase tracking-wider"
             onClick={() => router.push("/")}
           >
             Back to Home
@@ -1224,13 +1224,13 @@ export default function MockTestPage() {
         <div className="flex items-center gap-2">
           <Badge
             variant="outline"
-            className="border-border/60 font-mono text-[10px] text-muted-foreground"
+            className="border-border/60 font-sans text-[10px] text-muted-foreground"
           >
             Paper {currentSection.paper}
           </Badge>
           <Badge
             variant="outline"
-            className={`font-mono text-[10px] ${currentSection.colorClass}`}
+            className={`font-sans text-[10px] ${currentSection.colorClass}`}
           >
             {currentSection.label}
           </Badge>
@@ -1238,16 +1238,16 @@ export default function MockTestPage() {
 
         <Badge
           variant="outline"
-          className="border-border/60 font-mono text-xs text-muted-foreground"
+          className="border-border/60 font-sans text-xs text-muted-foreground"
         >
           Q {currentQIdx + 1}/{currentSectionQs.length}
         </Badge>
 
         <span
           className={[
-            "font-mono text-sm font-bold tabular-nums",
+            "font-sans text-sm font-bold tabular-nums",
             timerUrgent
-              ? "animate-pulse text-neon-amber text-glow-amber"
+              ? "animate-pulse text-neon-amber"
               : "text-muted-foreground",
           ].join(" ")}
         >
@@ -1331,7 +1331,7 @@ export default function MockTestPage() {
                 >
                   <span
                     className={[
-                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold",
+                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-md border font-sans text-xs font-bold",
                       isSelected
                         ? "border-neon-pink/60 text-neon-pink"
                         : "border-border/60 text-muted-foreground group-hover:text-foreground",
@@ -1352,7 +1352,7 @@ export default function MockTestPage() {
         <div className="flex justify-end">
           <Button
             onClick={handleConfirmAndNext}
-            className="bg-neon-pink font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
+            className="bg-neon-pink font-sans text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-pink/90"
           >
             {currentQIdx < currentSectionQs.length - 1
               ? "Next Question"

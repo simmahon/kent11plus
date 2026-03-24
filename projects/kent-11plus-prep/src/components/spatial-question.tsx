@@ -62,7 +62,7 @@ function ComplexFigure({
         y={0}
         width={size}
         height={size}
-        fill="oklch(0.13 0.01 270)"
+        fill="#161521"
         rx={8}
       />
 
@@ -84,7 +84,7 @@ function ComplexFigure({
                 y1="0.5"
                 x2="7"
                 y2="0.5"
-                stroke="oklch(0.7 0.15 195)"
+                stroke="#6b73f5"
                 strokeWidth="2"
               />
             </pattern>
@@ -94,7 +94,7 @@ function ComplexFigure({
             y1={(foldLine.y1 / 100) * size}
             x2={(foldLine.x2 / 100) * size}
             y2={(foldLine.y2 / 100) * size}
-            stroke="oklch(0.7 0.15 195)"
+            stroke="#6b73f5"
             strokeWidth={2}
             strokeDasharray="8 5"
             opacity={0.8}
@@ -134,7 +134,7 @@ function OptionFigure({
         y={0}
         width={size}
         height={size}
-        fill="oklch(0.13 0.01 270)"
+        fill="#161521"
         rx={4}
       />
       {shapes.map((shape, i) => (
@@ -213,7 +213,7 @@ export function SpatialQuestionDisplay({
             >
               <span
                 className={[
-                  "font-mono text-xs font-bold",
+                  "font-sans text-xs font-bold",
                   hasAnswered && isSelected && isCorrectOption
                     ? "text-neon-green"
                     : hasAnswered && isSelected && !isCorrectOption

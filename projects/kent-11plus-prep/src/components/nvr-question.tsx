@@ -56,7 +56,7 @@ function OptionButton({
     >
       <span
         className={[
-          "font-mono text-xs font-bold",
+          "font-sans text-xs font-bold",
           hasAnswered && isSelected && isCorrectOption
             ? "text-neon-green"
             : hasAnswered && isSelected && !isCorrectOption
@@ -138,7 +138,7 @@ function OddOneOutLayout({
           >
             <span
               className={[
-                "font-mono text-xs font-bold",
+                "font-sans text-xs font-bold",
                 hasAnswered && isSelected && isCorrectOption
                   ? "text-neon-green"
                   : hasAnswered && isSelected && !isCorrectOption

@@ -46,7 +46,7 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  /* Game-mode custom colors */
+  /* Semantic accent colors — mapped from neon-* to indigo palette */
   --color-neon-cyan: var(--neon-cyan);
   --color-neon-purple: var(--neon-purple);
   --color-neon-green: var(--neon-green);
@@ -56,62 +56,66 @@
   --color-surface-hover: var(--surface-hover);
 }
 
-/* Dark game-mode theme - always dark */
+/* ============================================================
+   Dark Academic / Indigo Dashboard Theme
+   Inspired by Creventor dashboard (Dribbble)
+   Deep navy surfaces, indigo-violet accent, calm & focused
+   ============================================================ */
 :root {
   --radius: 0.75rem;
 
-  /* Deep dark backgrounds */
-  --background: oklch(0.11 0.01 270);
-  --foreground: oklch(0.93 0.01 270);
-  --card: oklch(0.15 0.015 270);
-  --card-foreground: oklch(0.93 0.01 270);
-  --popover: oklch(0.15 0.015 270);
-  --popover-foreground: oklch(0.93 0.01 270);
+  /* Deep dark navy backgrounds — 3-tier depth system */
+  --background: #1b1a28;
+  --foreground: #f4f4fb;
+  --card: #232532;
+  --card-foreground: #f4f4fb;
+  --popover: #232532;
+  --popover-foreground: #f4f4fb;
 
-  /* Cyan neon primary */
-  --primary: oklch(0.78 0.18 195);
-  --primary-foreground: oklch(0.13 0.02 270);
+  /* Indigo-violet primary accent */
+  --primary: #6b73f5;
+  --primary-foreground: #f4f4fb;
 
   /* Muted dark surfaces */
-  --secondary: oklch(0.2 0.02 270);
-  --secondary-foreground: oklch(0.85 0.01 270);
-  --muted: oklch(0.18 0.015 270);
-  --muted-foreground: oklch(0.6 0.02 270);
-  --accent: oklch(0.22 0.03 270);
-  --accent-foreground: oklch(0.93 0.01 270);
+  --secondary: #2a2d3c;
+  --secondary-foreground: #d1d8f3;
+  --muted: #272e3e;
+  --muted-foreground: #9799a6;
+  --accent: #303143;
+  --accent-foreground: #f4f4fb;
 
-  /* Warm amber for errors (never red) */
-  --destructive: oklch(0.75 0.17 65);
+  /* Warm amber for errors */
+  --destructive: #f59e0b;
 
-  /* Subtle borders with slight purple tint */
-  --border: oklch(0.25 0.03 280);
-  --input: oklch(0.2 0.02 270);
-  --ring: oklch(0.78 0.18 195);
+  /* Subtle borders — no purple tint, just soft navy edges */
+  --border: #363543;
+  --input: #2a2d3c;
+  --ring: #6b73f5;
 
-  /* Chart colors - neon palette */
-  --chart-1: oklch(0.78 0.18 195);
-  --chart-2: oklch(0.72 0.2 300);
-  --chart-3: oklch(0.8 0.2 145);
-  --chart-4: oklch(0.82 0.17 85);
-  --chart-5: oklch(0.75 0.2 340);
+  /* Chart colors — indigo family + supporting hues */
+  --chart-1: #6b73f5;
+  --chart-2: #8b9bff;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #f472b6;
 
-  --sidebar: oklch(0.13 0.015 270);
-  --sidebar-foreground: oklch(0.93 0.01 270);
-  --sidebar-primary: oklch(0.78 0.18 195);
-  --sidebar-primary-foreground: oklch(0.13 0.02 270);
-  --sidebar-accent: oklch(0.2 0.02 270);
-  --sidebar-accent-foreground: oklch(0.93 0.01 270);
-  --sidebar-border: oklch(0.25 0.03 280);
-  --sidebar-ring: oklch(0.78 0.18 195);
+  --sidebar: #1e1e2a;
+  --sidebar-foreground: #f4f4fb;
+  --sidebar-primary: #6b73f5;
+  --sidebar-primary-foreground: #f4f4fb;
+  --sidebar-accent: #2a2d3c;
+  --sidebar-accent-foreground: #f4f4fb;
+  --sidebar-border: #363543;
+  --sidebar-ring: #6b73f5;
 
-  /* Neon accent colors */
-  --neon-cyan: oklch(0.78 0.18 195);
-  --neon-purple: oklch(0.72 0.2 300);
-  --neon-green: oklch(0.8 0.2 145);
-  --neon-amber: oklch(0.82 0.17 65);
-  --neon-pink: oklch(0.75 0.2 340);
-  --surface: oklch(0.17 0.02 270);
-  --surface-hover: oklch(0.22 0.025 270);
+  /* Semantic accent colors — calm indigo system replaces neon */
+  --neon-cyan: #6b73f5;       /* primary indigo — buttons, progress, active */
+  --neon-purple: #8b9bff;     /* lighter indigo — secondary accent */
+  --neon-green: #34d399;      /* emerald green — correct answers, success */
+  --neon-amber: #fbbf24;      /* warm amber — wrong answers, warnings */
+  --neon-pink: #f472b6;       /* soft pink — highlights, badges */
+  --surface: #1e1e2a;         /* elevated surface */
+  --surface-hover: #2a2d3c;   /* hover state surface */
 }
 
 @layer base {
@@ -124,58 +128,41 @@
   }
 }
 
-/* Neon glow utilities */
+/* Glow utilities — softer, more subtle than neon */
 @layer utilities {
   .glow-cyan {
-    box-shadow: 0 0 20px oklch(0.78 0.18 195 / 0.3),
-                0 0 40px oklch(0.78 0.18 195 / 0.1);
+    box-shadow: 0 0 12px #6b73f540, 0 0 24px #6b73f515;
   }
   .glow-green {
-    box-shadow: 0 0 20px oklch(0.8 0.2 145 / 0.3),
-                0 0 40px oklch(0.8 0.2 145 / 0.1);
+    box-shadow: 0 0 12px #34d39940, 0 0 24px #34d39915;
   }
   .glow-amber {
-    box-shadow: 0 0 20px oklch(0.82 0.17 65 / 0.3),
-                0 0 40px oklch(0.82 0.17 65 / 0.1);
+    box-shadow: 0 0 12px #fbbf2440, 0 0 24px #fbbf2415;
   }
   .glow-purple {
-    box-shadow: 0 0 20px oklch(0.72 0.2 300 / 0.3),
-                0 0 40px oklch(0.72 0.2 300 / 0.1);
+    box-shadow: 0 0 12px #8b9bff40, 0 0 24px #8b9bff15;
   }
   .glow-pink {
-    box-shadow: 0 0 20px oklch(0.75 0.2 340 / 0.3),
-                0 0 40px oklch(0.75 0.2 340 / 0.1);
+    box-shadow: 0 0 12px #f472b640, 0 0 24px #f472b615;
   }
   .text-glow-cyan {
-    text-shadow: 0 0 10px oklch(0.78 0.18 195 / 0.5);
+    text-shadow: 0 0 8px #6b73f550;
   }
   .text-glow-green {
-    text-shadow: 0 0 10px oklch(0.8 0.2 145 / 0.5);
+    text-shadow: 0 0 8px #34d39950;
   }
   .text-glow-amber {
-    text-shadow: 0 0 10px oklch(0.82 0.17 65 / 0.5);
+    text-shadow: 0 0 8px #fbbf2450;
   }
 
-  /* Grid background pattern for game feel */
+  /* Clean subtle background — no grid, just a soft radial gradient */
   .grid-bg {
-    background-image:
-      linear-gradient(oklch(0.25 0.03 280 / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.25 0.03 280 / 0.3) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-image: radial-gradient(ellipse at 50% 0%, #6b73f508 0%, transparent 60%);
   }
 
-  /* Scanline overlay effect */
+  /* Scanlines replaced with no-op (kept for compat) */
   .scanlines::after {
     content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      oklch(0 0 0 / 0.03) 2px,
-      oklch(0 0 0 / 0.03) 4px
-    );
+    display: none;
   }
 }
