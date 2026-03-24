@@ -914,28 +914,18 @@ export default function PracticePage() {
                       {OPTION_LABELS[idx]}
                     </span>
                     <span className="text-sm flex-1">{option}</span>
-                    {hasAnswered && isSelected && isCorrectOption && (
-                      <span
-                        role="button"
-                        tabIndex={0}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleNext();
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.stopPropagation();
-                            handleNext();
-                          }
-                        }}
-                        className="ml-auto shrink-0 rounded-md bg-neon-cyan px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90 transition-colors cursor-pointer"
-                      >
-                        {currentQuestionIndex < totalQuestions - 1
-                          ? "Next →"
-                          : "Results →"}
-                      </span>
-                    )}
                   </button>
+                  {hasAnswered && isSelected && isCorrectOption && (
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 z-10 shrink-0 rounded-md bg-neon-cyan px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-background hover:bg-neon-cyan/90 transition-colors cursor-pointer"
+                    >
+                      {currentQuestionIndex < totalQuestions - 1
+                        ? "Next →"
+                        : "Results →"}
+                    </button>
+                  )}
                 </div>
               );
             })}
